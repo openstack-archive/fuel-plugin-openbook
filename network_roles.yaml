@@ -1,0 +1,14 @@
+# Unique network role name
+- id: "openbook"
+  # Role mapping to network
+  default_mapping: "management"
+  properties:
+    # Should be true if network role requires subnet being set
+    subnet: true
+    # Should be true if network role requires gateway being set
+    gateway: false
+    vip:
+       - name: "openbook_vip_public"
+         namespace: "haproxy"
+         node_roles: ["base-os"]
+

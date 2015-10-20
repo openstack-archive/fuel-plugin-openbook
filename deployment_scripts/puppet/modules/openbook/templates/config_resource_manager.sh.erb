@@ -1,0 +1,51 @@
+#!/bin/bash
+
+KEYSTONE_COMMAND="<%= @keystone_command %> --os-username <%= @admin_username %> --os-password <%= @admin_password %> --os-tenant-name <%= @admin_tenant %> --os-auth-url <%= @os_auth_url %>"
+KEYSTONE_ARGS=' <%= @keystone_args %>'
+
+TENANT_ID=$($KEYSTONE_COMMAND $KEYSTONE_ARGS | grep id | awk -F\| '{print $3}' | cut -d ' ' -f2)
+
+read -d '' METADATA <<EOF
+metadata={
+  "resourceSyncEnabled": "true",
+  "resourceSyncFrequency": "5",
+  "associatedProvider": "1",
+  "periodicFullSyncEnabled": false,
+  "periodicFullSyncInterval": "24",
+  "connectionParams": {
+    "connectionUrl": "<%= @keystone_admin_url %>",
+    "userName": "<%= @admin_username %>",
+    "adminTenantId": "$TENANT_ID",
+    "password": "<%= @admin_password %>",
+    "isMemberOfAllProjects": false
+  },
+  "usageMetrics": [
+    
+  ],
+  "tenantsToIgnore": "",
+  "regionsToSync": "RegionOne",
+  "entitiesToSync": [
+    "Floating IP",
+    "Instance",
+    "Network",
+    "Port",
+    "Router",
+    "Subnet",
+    "Volume",
+    "Image",
+    "Load Balancer VIP",
+    "Firewall"
+  ]
+}
+EOF
+
+RESULT=$(curl -s -k --user 'openbook:Tall!g3nt' -XPOST -D - 'https://<%= @ipaddress %>:8443/Openbook/resource/resourcemanagers' -H 'Content-Type: application/x-www-form-urlencoded' -d 'name=MOS Environment' -d 'description=Mirantis OpenStack Environment' -d 'vendorType=OpenStack' --data-urlencode "$METADATA")
+
+echo "$RESULT" >> /tmp/resource_manager_result.txt
+
+if [[ "$RESULT" == *"201 Created"* ]]; then
+  exit
+else
+  echo "Something went wrong with creating the resource manager. Check /tmp/resource_manager_results.txt and tomcat logs"
+fi
+

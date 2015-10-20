@@ -1,0 +1,9 @@
+- id: openbook
+  type: group
+  role: [openbook]
+  tasks:
+    - hiera
+    - globals
+    - netconfig
+  required_for: [deploy_end]
+  requires: [deploy_start]

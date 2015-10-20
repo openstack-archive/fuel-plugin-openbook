@@ -1,0 +1,30 @@
+- role: ['base-os']
+  stage: post_deployment/8000
+  type: puppet
+  parameters:
+    puppet_manifest: puppet/manifests/check_environment_configuration.pp
+    puppet_modules: puppet/modules
+    timeout: 300
+
+- role: ['base-os']
+  stage: post_deployment/8100
+  type: puppet
+  parameters:
+    puppet_manifest: puppet/manifests/netconfig.pp
+    puppet_modules: /etc/puppet/modules
+    timeout: 720
+- role: ['base-os']
+  stage: post_deployment/8900
+  type: puppet
+  parameters:
+    puppet_manifest: puppet/manifests/deploy.pp
+    puppet_modules: puppet/modules
+    timeout: 1500
+- role: ['base-os']
+  stage: post_deployment/8900
+  type: puppet
+  parameters:
+    puppet_manifest: puppet/manifests/finalize.pp
+    puppet_modules: puppet/modules
+    timeout: 300
+

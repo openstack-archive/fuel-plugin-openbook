@@ -1,0 +1,129 @@
+import json
+import httplib
+import os
+import urlparse
+import urllib
+
+"""
+Copyright (c) 2014 Citrix Systems, Inc.
+ 
+Permission is hereby granted, free of charge, to any person obtaining a
+copy of this software and associated documentation files (the "Software"),
+to deal in the Software without restriction, including without limitation
+the rights to use, copy, modify, merge, publish, distribute, sublicense,
+and/or sell copies of the Software, and to permit persons to whom the
+Software is furnished to do so, subject to the following conditions:
+ 
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+ 
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+IN THE SOFTWARE.
+"""
+ 
+"""
+This script is a modified version of a Citrix example for interacting with
+the Sharefile API.  It is used here to allow authentication with Sharefile
+to download the latest Openbook package.
+"""
+ 
+def authenticate(hostname, client_id, client_secret, username, password):
+    """ Authenticate via username/password. Returns json token object.
+     
+    Args:
+    string hostname - hostname like "myaccount.sharefile.com"
+    string client_id - OAuth2 client_id key
+    string client_secret - OAuth2 client_secret key 
+    string username - my@user.name
+    string password - my password """
+ 
+    uri_path = '/oauth/token'
+     
+    headers = {'Content-Type':'application/x-www-form-urlencoded'}
+    params = {'grant_type':'password', 'client_id':client_id, 'client_secret':client_secret, 
+              'username':username, 'password':password}
+     
+    http = httplib.HTTPSConnection(hostname)
+    http.request('POST', uri_path, urllib.urlencode(params), headers=headers)
+    response = http.getresponse()
+     
+    print response.status, response.reason
+    token = None
+    if response.status == 200:
+        token = json.loads(response.read())
+     
+    http.close()
+    return token
+ 
+def get_authorization_header(token):
+    return {'Authorization':'Bearer %s'%(token['access_token'])}
+     
+def get_hostname(token):
+    return '%s.sf-api.com'%(token['subdomain'])
+
+def query(token, search_term):
+    """ Performs a simple search based on a search term.  Returns the item id.
+     
+    Args:
+    dict json token acquired from authenticate function
+    string search_term - the term to search"""
+    
+    uri_path = '/sf/v3/Items/Search?query=%s'%(search_term)
+    print 'GET %s%s'%(get_hostname(token), uri_path)
+    http = httplib.HTTPSConnection(get_hostname(token))
+    http.request('GET', uri_path, headers=get_authorization_header(token))
+    response = http.getresponse()
+    results = json.loads(response.read())
+    return results['Results'][0]['ItemID']
+    
+ 
+def download_item(token, item_id, local_path):
+    """ Downloads a single Item. If downloading a folder the local_path name should end in .zip.
+     
+    Args:
+    dict json token acquired from authenticate function
+    string item_id - the id of the item to download 
+    string local_path - where to download the item to, like "c:\\path\\to\\the.file" """
+ 
+    uri_path = '/sf/v3/Items(%s)/Download'%(item_id)
+    print 'GET %s%s'%(get_hostname(token), uri_path)
+    http = httplib.HTTPSConnection(get_hostname(token))
+    http.request('GET', uri_path, headers=get_authorization_header(token))
+    response = http.getresponse()
+    location = response.getheader('location')
+    redirect = None
+    if location:
+        redirect_uri = urlparse.urlparse(location)
+        redirect = httplib.HTTPSConnection(redirect_uri.netloc)
+        redirect.request('GET', '%s?%s'%(redirect_uri.path, redirect_uri.query))
+        response = redirect.getresponse()
+         
+    with open(local_path, 'wb') as target:
+        b = response.read(1024*8)
+        while b:
+            target.write(b)
+            b = response.read(1024*8)
+             
+    print response.status, response.reason
+    http.close()
+    if redirect:
+        redirect.close()
+ 
+ 
+
+ 
+if __name__ == '__main__':
+    hostname  = '<%= scope.lookupvar("openbook::params::sharefile_hostname") %>'
+    username  = '<%= scope.lookupvar("openbook::params::sharefile_username") %>'
+    password  = '<%= scope.lookupvar("openbook::params::sharefile_password") %>'
+    client_id = '<%= scope.lookupvar("openbook::params::sharefile_client_id") %>'
+    client_secret = '<%= scope.lookupvar("openbook::params::sharefile_client_secret") %>'
+    download_path = '<%= scope.lookupvar("openbook::params::sharefile_download_path") %>'
+    
+    token = authenticate(hostname, client_id, client_secret, username, password)
+    download_item(token, query(token, 'zip'), download_path)
