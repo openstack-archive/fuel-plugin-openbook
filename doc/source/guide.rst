@@ -8,7 +8,7 @@ User Guide
 Plugin configuration
 --------------------
 
-#. `Create a new environment <https://docs.mirantis.com/openstack/fuel/fuel-7.0/user-guide.html#launch-wizard-to-create-new-environment>`_
+#. `Create a new environment <https://docs.mirantis.com/openstack/fuel/fuel-6.1/user-guide.html#launch-wizard-to-create-new-environment>`_
    with the Fuel UI wizard.  At the moment only the Ubuntu distribution is supported.
 
    * When stepping through the 'new OpenStack environment' wizard, be sure to enable 
@@ -20,8 +20,18 @@ Plugin configuration
     
 #. Click on the Settings tab of the Fuel web UI.
 
+<<<<<<< HEAD
    Select the "Openbook Plugin" tab, enable the plugin by clicking on the
    "Openbook Plugin" checkbox and fill-in the required fields (default for 'database password' is Tall!g3nt):
+=======
+- Click on the Settings tab of the Fuel web UI.
+
+  Scroll down the page, select the Openbook Plugin check-box and fill-in the required fields:
+
+  .. image:: _static/plugin-openbook-config-61.png
+     :alt: A screenshot of the Openbook Plugin settings UI for 6.1
+     :scale: 90%
+>>>>>>> 0c34711... branched off for 6.1; removed all 7.0-related material
 
    .. image:: _static/plugin-openbook-config_s.png
       :alt: A screenshot of the Openbook Plugin settings UI for 7.0
@@ -42,20 +52,47 @@ Plugin configuration
       :alt: A screenshot of the Openbook host name
       :scale: 90%
 
+<<<<<<< HEAD
 #. Select the *Networks* tab, scroll to the bottom, and `Verify Networks <https://docs.mirantis.com/openstack/fuel/fuel-7.0/user-guide.html#verify-networks>`_.
 
 #. Then finally, `Deploy Changes <https://docs.mirantis.com/openstack/fuel/fuel-7.0/user-guide.html#deploy-changes>`_.
 
 .. _plugin_install_verification:
+=======
+- After `adding all OpenStack nodes/roles <https://docs.mirantis.com/openstack/fuel/fuel-6.1/user-guide.html#add-nodes-ug>`_
+  , add an Operating System (base-os) node and rename the base-os host as "openbook":
+
+  .. image:: _static/select-os-openbook.png
+     :alt: A screenshot of the Openbook host name
+     :scale: 90%
+
+- Select the *Networks* tab, scroll to the bottom, and `Verify Networks <https://docs.mirantis.com/openstack/fuel/fuel-6.1/user-guide.html#verify-networks>`_.
+
+- Then finally, `Deploy Changes <https://docs.mirantis.com/openstack/fuel/fuel-6.1/user-guide.html#deploy-changes>`_
+>>>>>>> 0c34711... branched off for 6.1; removed all 7.0-related material
 
 Plugin Install Verification
 ---------------------------
 
+<<<<<<< HEAD
 Once the deployment is finished, the Dashboard tab will display the "Success" notification, stating that
 the plugin is deployed and will give the URL schema for accessing the Openbook UI.
 
 .. image:: _static/deployment-success.png
    :alt: A screenshot of the Dashboard Success notification
+=======
+Once the deployment is finished, a 'Success' notification will display.
+
+.. image:: _static/deployment-success.png
+   :alt: A screenshot of the notification message
+   :scale: 90%
+
+When expanding the success dialog ('Show additional information'), there will be a message stating that the plugin is deployed and
+will give the URL schema for accessing the Openbook UI.
+
+.. image:: _static/deployment-success-full.png
+   :alt: A screenshot of the full notification message
+>>>>>>> 0c34711... branched off for 6.1; removed all 7.0-related material
    :scale: 90%
 
 Use the fuel command line to retrieve the IP address of the openbook node.
@@ -65,12 +102,21 @@ Use the fuel command line to retrieve the IP address of the openbook node.
 .. code:: bash
 
     [root@fuel ~]# fuel nodes
+<<<<<<< HEAD
     id | status   | name          | cluster | ip        | [..] | roles             | [..] 
     ---|----------|---------------|---------|-----------|------|-------------------|------
     2  | ready    | compute-01    | 2       | 10.20.0.4 |      | cinder, compute   |      
     1  | ready    | controller-01 | 2       | 10.20.0.3 |      | controller, mongo |      
     3  | ready    | openbook      | 2       | 10.20.0.5 |      | openbook          |      
     .. | .....    | ..............| ...     | ......... |      | ...............   |      
+=======
+    id | status   | name           | cluster | ip        | [..] | roles             | [..] 
+    ---|----------|----------------|---------|-----------|------|-------------------|------
+    2  | ready    | compute-01     | 2       | 10.20.0.4 |      | cinder, compute   |      
+    1  | ready    | controller-01  | 2       | 10.20.0.3 |      | controller, mongo |      
+    3  | ready    | openbook       | 2       | 10.20.0.5 |      | base-os           |      
+    .. | .....    | .............. | ...     | ......... |      | ...............   |      
+>>>>>>> 0c34711... branched off for 6.1; removed all 7.0-related material
 
 In this example, the Openbook UI would be accessed at ``https://10.20.0.5:8443/Openbook``
 

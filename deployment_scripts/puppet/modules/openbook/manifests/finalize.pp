@@ -22,6 +22,7 @@ class openbook::finalize {
   $keystone_admin_url   = "http://${management_vip}:35357/v2.0"
   $os_auth_url    = "http://${management_vip}:5000/v2.0"
   
+<<<<<<< HEAD
   $keystone_client  = 'python-openstackclient'
   $keystone_command = 'openstack'
   $keystone_args    = "project show ${admin_tenant}"
@@ -31,6 +32,11 @@ class openbook::finalize {
   
   # Need to add trust chain so that Openbook can talk to https endpoints
   class { 'openbook::ssl_add_trust_chain': }->
+=======
+  $keystone_client  = 'python-keystoneclient'
+  $keystone_command = 'keystone'
+  $keystone_args    = 'tenant-get admin'
+>>>>>>> 0c34711... branched off for 6.1; removed all 7.0-related material
   
   package { "$keystone_client":
     ensure => present
