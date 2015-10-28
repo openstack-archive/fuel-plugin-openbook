@@ -27,7 +27,9 @@ is required.
 
 ```
     git clone https://github.com/openstack/fuel-plugin-openbook.git
-    fpb --build fuel-plugin-openbook
+    cd fuel-plugin-openbook
+    git checkout 6.1
+    fpb --build .
 ```
 
 ### How to install the plugin
@@ -35,22 +37,22 @@ is required.
 Copy the plugin file to the Fuel Master node.
 
 ```
-    cd fuel-plugin-openbook
-    scp fuel-plugin-openbook*rpm root@<Fuel Master node IP address>:
+    scp openbook*rpm root@<Fuel Master node IP address>:
 ```
 
 Install the plugin using the fuel command line:
 
 ```
     ssh root@<Fuel Master node IP address>
-    fuel plugins --install fuel-plugin-openbook*.rpm
+    fuel plugins --install openbook*.rpm
 ```
 
 Verify that the plugin is installed correctly:
 
 ```
     [root@fuel ~]# fuel plugins --list
-    id | name                 | version | package_version
-    ---|----------------------|---------|----------------
-    2  | fuel-plugin-openbook | 1.0.0   | 2.0.0          
+    id | name     | version | package_version
+    ---|----------|---------|----------------
+    2  | openbook | 1.0.0   | 2.0.0          
 ```
+
