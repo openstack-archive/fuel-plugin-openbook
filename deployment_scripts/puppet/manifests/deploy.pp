@@ -13,10 +13,5 @@
 #    under the License.
 #
 
-$openbook_hash = hiera('openbook')
-
-if $openbook_hash['node_name'] == hiera('user_node_name') {
-
-    class {'openbook::db::mysql': } ->
-    class {'openbook::tomcat::server': }
-}
+class {'openbook::db::mysql': } ->
+class {'openbook::tomcat::server': }

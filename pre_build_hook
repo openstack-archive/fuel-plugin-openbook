@@ -12,55 +12,54 @@ http://ftp.osuosl.org/pub/mariadb/repo/10.0/ubuntu/pool/main/m/mariadb-10.0/mari
 http://ftp.osuosl.org/pub/mariadb/repo/10.0/ubuntu/pool/main/m/mariadb-10.0/mariadb-client-10.0_10.0.21+maria-1~trusty_amd64.deb \
 http://ftp.osuosl.org/pub/mariadb/repo/10.0/ubuntu/pool/main/m/mariadb-10.0/mariadb-server-core-10.0_10.0.21+maria-1~trusty_amd64.deb \
 http://ftp.osuosl.org/pub/mariadb/repo/10.0/ubuntu/pool/main/m/mariadb-10.0/mariadb-server-10.0_10.0.21+maria-1~trusty_amd64.deb \
-http://ftp.osuosl.org/pub/mariadb/repo/10.0/ubuntu/pool/main/m/mariadb-10.0/mariadb-server_10.0.21+maria-1~trusty_all.deb \
-http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/liba/libaio/libaio1_0.3.109-4_amd64.deb \
-http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/r/readline5/libreadline5_5.2+dfsg-2_amd64.deb \
-http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/libd/libdbi-perl/libdbi-perl_1.630-1_amd64.deb \
-http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/libd/libdbd-mysql-perl/libdbd-mysql-perl_4.025-1_amd64.deb \
-http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/libh/libhtml-template-perl/libhtml-template-perl_2.95-1_all.deb
+http://archive.ubuntu.com/ubuntu/pool/main/liba/libaio/libaio1_0.3.109-4_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libd/libdbi-perl/libdbi-perl_1.630-1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libd/libdbd-mysql-perl/libdbd-mysql-perl_4.025-1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libh/libhtml-template-perl/libhtml-template-perl_2.95-1_all.deb
+
 
 
 # Packages needed for Tomcat
-download_package http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/liba/libasyncns/libasyncns0_0.8-4ubuntu2_amd64.deb \
-http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/a/avahi/libavahi-common-data_0.6.31-4ubuntu1_amd64.deb \
-http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/a/avahi/libavahi-common3_0.6.31-4ubuntu1_amd64.deb \
-http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/a/avahi/libavahi-client3_0.6.31-4ubuntu1_amd64.deb \
-http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/c/cups/libcups2_1.7.2-0ubuntu1.6_amd64.deb \
-http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/libo/libogg/libogg0_1.3.1-1ubuntu1_amd64.deb \
-http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/f/flac/libflac8_1.3.0-2ubuntu0.14.04.1_amd64.deb \
-http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/f/fonts-dejavu/fonts-dejavu-core_2.34-1ubuntu1_all.deb \
-http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/f/fontconfig/fontconfig-config_2.11.0-0ubuntu4.1_all.deb \
-http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/f/fontconfig/libfontconfig1_2.11.0-0ubuntu4.1_amd64.deb \
-http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/libj/libjpeg-turbo/libjpeg-turbo8_1.3.0-0ubuntu2_amd64.deb \
-http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/l/lcms2/liblcms2-2_2.5-0ubuntu4_amd64.deb \
-http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/n/nspr/libnspr4_4.10.7-0ubuntu0.14.04.1_amd64.deb \
-http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/n/nss/libnss3-nssdb_3.19.2-0ubuntu0.14.04.1_all.deb \
-http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/n/nss/libnss3_3.19.2-0ubuntu0.14.04.1_amd64.deb \
-http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/p/pcsc-lite/libpcsclite1_1.8.10-1ubuntu1_amd64.deb \
-http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/libv/libvorbis/libvorbis0a_1.3.2-1.3ubuntu1_amd64.deb \
-http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/libv/libvorbis/libvorbisenc2_1.3.2-1.3ubuntu1_amd64.deb \
-http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/libs/libsndfile/libsndfile1_1.0.25-7ubuntu2_amd64.deb \
-http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/p/pulseaudio/libpulse0_4.0-0ubuntu11.1_amd64.deb \
-http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/j/java-common/java-common_0.51_all.deb \
-http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/j/java-common/default-jre-headless_1.7-51_amd64.deb \
-http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/c/ca-certificates-java/ca-certificates-java_20130815ubuntu1_all.deb \
-http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/t/tzdata/tzdata_2015f-0ubuntu0.14.04_all.deb \
-http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/t/tzdata/tzdata-java_2015f-0ubuntu0.14.04_all.deb \
-http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/libj/libjpeg8-empty/libjpeg8_8c-2ubuntu8_amd64.deb \
-http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/o/openjdk-7/openjdk-7-jre-headless_7u79-2.5.6-0ubuntu1.14.04.1_amd64.deb \
-http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/libc/libcommons-collections3-java/libcommons-collections3-java_3.2.1-6_all.deb \
-http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/c/commons-pool/libcommons-pool-java_1.6-2_all.deb \
-http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/libc/libcommons-dbcp-java/libcommons-dbcp-java_1.4-3ubuntu1_all.deb \
-http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/e/ecj/libecj-java_3.9.0-1_all.deb \
-http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/g/geronimo-jta-1.1-spec/libgeronimo-jta-1.1-spec-java_1.1.1-3ubuntu1_all.deb \
-http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/t/tomcat7/libservlet3.0-java_7.0.52-1ubuntu0.3_all.deb \
-http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/t/tomcat7/libtomcat7-java_7.0.52-1ubuntu0.3_all.deb \
-http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/t/tomcat7/tomcat7-common_7.0.52-1ubuntu0.3_all.deb \
-http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/t/tomcat7/tomcat7_7.0.52-1ubuntu0.3_all.deb \
-http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/a/authbind/authbind_2.1.1_amd64.deb
+download_package http://archive.ubuntu.com/ubuntu/pool/main/liba/libasyncns/libasyncns0_0.8-4ubuntu2_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/a/avahi/libavahi-common-data_0.6.31-4ubuntu1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/a/avahi/libavahi-common3_0.6.31-4ubuntu1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/a/avahi/libavahi-client3_0.6.31-4ubuntu1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/c/cups/libcups2_1.7.2-0ubuntu1.6_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libo/libogg/libogg0_1.3.1-1ubuntu1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/f/flac/libflac8_1.3.0-2ubuntu0.14.04.1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/f/fonts-dejavu/fonts-dejavu-core_2.34-1ubuntu1_all.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/f/fontconfig/fontconfig-config_2.11.0-0ubuntu4.1_all.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/f/fontconfig/libfontconfig1_2.11.0-0ubuntu4.1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libj/libjpeg-turbo/libjpeg-turbo8_1.3.0-0ubuntu2_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/l/lcms2/liblcms2-2_2.5-0ubuntu4_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/n/nspr/libnspr4_4.10.7-0ubuntu0.14.04.1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/n/nss/libnss3-nssdb_3.19.2-0ubuntu0.14.04.1_all.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/n/nss/libnss3_3.19.2-0ubuntu0.14.04.1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/p/pcsc-lite/libpcsclite1_1.8.10-1ubuntu1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libv/libvorbis/libvorbis0a_1.3.2-1.3ubuntu1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libv/libvorbis/libvorbisenc2_1.3.2-1.3ubuntu1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libs/libsndfile/libsndfile1_1.0.25-7ubuntu2_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/p/pulseaudio/libpulse0_4.0-0ubuntu11.1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/l/lksctp-tools/libsctp1_1.0.15+dfsg-1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/j/java-common/java-common_0.51_all.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/j/java-common/default-jre-headless_1.7-51_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/c/ca-certificates-java/ca-certificates-java_20130815ubuntu1_all.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/t/tzdata/tzdata-java_2015g-0ubuntu0.14.04_all.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libj/libjpeg8-empty/libjpeg8_8c-2ubuntu8_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/o/openjdk-7/openjdk-7-jre-headless_7u85-2.6.1-5ubuntu0.14.04.1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libc/libcommons-collections3-java/libcommons-collections3-java_3.2.1-6_all.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/c/commons-pool/libcommons-pool-java_1.6-2_all.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libc/libcommons-dbcp-java/libcommons-dbcp-java_1.4-3ubuntu1_all.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/e/ecj/libecj-java_3.9.0-1_all.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/g/geronimo-jta-1.1-spec/libgeronimo-jta-1.1-spec-java_1.1.1-3ubuntu1_all.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/t/tomcat7/libservlet3.0-java_7.0.52-1ubuntu0.3_all.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/t/tomcat7/libtomcat7-java_7.0.52-1ubuntu0.3_all.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/l/lksctp-tools/lksctp-tools_1.0.15+dfsg-1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/t/tomcat7/tomcat7-common_7.0.52-1ubuntu0.3_all.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/t/tomcat7/tomcat7_7.0.52-1ubuntu0.3_all.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/a/authbind/authbind_2.1.1_amd64.deb
+
 
 
 # Additional dependencies
-download_package http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/a/autogen/libopts25_5.18-2ubuntu2_amd64.deb \
-http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/n/ntp/ntp_4.2.6.p5+dfsg-3ubuntu2.14.04.3_amd64.deb \
-http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/u/unzip/unzip_6.0-9ubuntu1.3_amd64.deb
+download_package http://archive.ubuntu.com/ubuntu/pool/main/u/unzip/unzip_6.0-9ubuntu1.3_amd64.deb

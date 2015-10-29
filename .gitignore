@@ -1,0 +1,7 @@
+.tox
+.build
+*.pyc
+repositories/centos/*
+repositories/ubuntu/*
+*.rpm
+doc/build
