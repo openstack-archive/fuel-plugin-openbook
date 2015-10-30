@@ -60,4 +60,4 @@ http://archive.ubuntu.com/ubuntu/pool/main/a/authbind/authbind_2.1.1_amd64.deb
 
 
 # Additional dependencies
-download_package http://archive.ubuntu.com/ubuntu/pool/main/u/unzip/unzip_6.0-9ubuntu1.3_amd64.deb
+download_package http://archive.ubuntu.com/ubuntu/pool/main/u/unzip/unzip_6.0-9ubuntu1.4_amd64.deb
