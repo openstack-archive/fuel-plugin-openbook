@@ -3,8 +3,8 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to fuel-plugin-openbook's documentation!
-================================================
+Welcome to The Openbook Plugin for Fuel!
+============================================================
 
 Contents:
 
@@ -15,10 +15,4 @@ Contents:
    installation
    guide
 
-
-
-Indices and tables
-==================
-
-* :ref:`search`
 

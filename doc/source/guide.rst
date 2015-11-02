@@ -7,7 +7,7 @@ Intro
 `Contact Talligent <mailto:openbook@talligent.com>`_ to get access to the 
 Talligent Sharefile account for downloading Openbook and the Openbook User Guide.
 
-#. `Create a new environment <https://docs.mirantis.com/openstack/fuel/fuel-6.1/user-guide.html#launch-wizard-to-create-new-environment>`_
+1. `Create a new environment <https://docs.mirantis.com/openstack/fuel/fuel-6.1/user-guide.html#launch-wizard-to-create-new-environment>`_
    with the Fuel UI wizard.  At the moment only the Ubuntu distribution is supported.
 
   * When stepping through the 'new OpenStack environment' wizard, be sure to enable 
@@ -17,8 +17,7 @@ Talligent Sharefile account for downloading Openbook and the Openbook User Guide
     .. image:: _static/ceilometer-select_s.png
        :alt: A screenshot of the Install Ceilometer step
     
-
-- Click on the Settings tab of the Fuel web UI.
+2. Click on the Settings tab of the Fuel web UI.
 
   Scroll down the page, select the Openbook Plugin check-box and fill-in the required fields:
 
@@ -31,21 +30,20 @@ Talligent Sharefile account for downloading Openbook and the Openbook User Guide
   when you received the e-mail about your Sharefile account being created. If you do not
   have Sharefile access to Talligent, please contact openbook@talligent.com.
 
+3. Click *Save Settings* at the bottome of the page to save the configuration parameters.
 
-- Click *Save Settings* at the bottome of the page to save the configuration parameters.
+4. Switch to the *Nodes* tab.
 
-- Switch to the *Nodes* tab.
-
-- After `adding all OpenStack nodes/roles <https://docs.mirantis.com/openstack/fuel/fuel-6.1/user-guide.html#add-nodes-ug>`_
-  , add an Operating System (base-os) node and rename the base-os host as "openbook":
+5. After `adding all OpenStack nodes/roles <https://docs.mirantis.com/openstack/fuel/fuel-6.1/user-guide.html#add-nodes-ug>`_,
+   add an Operating System (base-os) node and rename the base-os host as "openbook":
 
   .. image:: _static/select-os-openbook.png
      :alt: A screenshot of the Openbook host name
      :scale: 90%
 
-- Select the *Networks* tab, scroll to the bottom, and `Verify Networks <https://docs.mirantis.com/openstack/fuel/fuel-6.1/user-guide.html#verify-networks>`_.
+6. Select the *Networks* tab, scroll to the bottom, and `Verify Networks <https://docs.mirantis.com/openstack/fuel/fuel-6.1/user-guide.html#verify-networks>`_.
 
-- Then finally, `Deploy Changes <https://docs.mirantis.com/openstack/fuel/fuel-6.1/user-guide.html#deploy-changes>`_
+7. Then finally, `Deploy Changes <https://docs.mirantis.com/openstack/fuel/fuel-6.1/user-guide.html#deploy-changes>`_
 
 Plugin Install Verification
 +++++++++++++++++++++++++++
@@ -77,4 +75,7 @@ Use the fuel command line to retrieve the IP address of the openbook node.
 
 In this example, the Openbook UI would be accessed at ``https://10.20.0.5:8443/Openbook``
 
+Using Openbook
+++++++++++++++
 
+For instructions on using Openbook, please see the `official documentation <https://talligent.sharefile.com/>`_.
