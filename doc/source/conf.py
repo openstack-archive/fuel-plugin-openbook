@@ -28,10 +28,8 @@ import os
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = [
-#    'sphinx.ext.todo',
-#    'sphinx.ext.coverage',
-]
+#extensions = ['rst2pdf.pdfbuilder']
+extensions = [ ]
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -46,7 +44,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'fuel-plugin-openbook'
+project = u'The Openbook plugin for Fuel'
 copyright = u'2015, Talligent Inc.'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -199,7 +197,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-  ('index', 'fuel-plugin-openbook.tex', u'fuel-plugin-openbook Documentation',
+  ('index', 'fuel-plugin-openbook.tex', u'The Openbook Plugin for Fuel Documentation',
    u'Talligent Inc.', 'manual'),
 ]
 
@@ -229,7 +227,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'fuel-plugin-openbook', u'fuel-plugin-openbook Documentation',
+    ('index', 'fuel-plugin-openbook', u'Guide to the Openbook Plugin ver. 1.0.0 for Fuel',
      [u'Talligent Inc.'], 1)
 ]
 
@@ -243,8 +241,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  ('index', 'fuel-plugin-openbook', u'fuel-plugin-openbook Documentation',
-   u'Talligent Inc.', 'fuel-plugin-openbook', 'One line description of project.',
+  ('index', 'fuel-plugin-openbook', u'The Openbook Plugin for Fuel Documentation',
+   u'Talligent Inc.', 'fuel-plugin-openbook', 'The Openbook Plugin for Fuel Documentation',
    'Miscellaneous'),
 ]
 
@@ -264,7 +262,7 @@ texinfo_documents = [
 # -- Options for Epub output ----------------------------------------------
 
 # Bibliographic Dublin Core info.
-epub_title = u'fuel-plugin-openbook'
+epub_title = u'The Openbook Plugin for Fuel'
 epub_author = u'Talligent Inc.'
 epub_publisher = u'Talligent Inc.'
 epub_copyright = u'2015, Talligent Inc.'
