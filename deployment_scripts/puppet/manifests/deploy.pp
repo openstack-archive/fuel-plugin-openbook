@@ -12,6 +12,6 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 #
-
+notice('MODULAR: deploy.pp')
 class {'openbook::db::mysql': } ->
 class {'openbook::tomcat::server': }
