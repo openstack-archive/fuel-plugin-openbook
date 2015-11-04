@@ -24,7 +24,7 @@ class openbook::finalize {
   
   $keystone_client  = 'python-openstackclient'
   $keystone_command = 'openstack'
-  $keystone_args    = 'project show admin'
+  $keystone_args    = "project show ${admin_tenant}"
   
   $public_ssl_hash = hiera('public_ssl')
   $ip = hiera('public_vip')
