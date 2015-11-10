@@ -1,58 +1,30 @@
-Installation
-============
-
-Where to download the plugin
-++++++++++++++++++++++++++++
-
-The plugin in not yet distribuited as package.  You have to build it
-yourself.
-
-The code is hosted on `github openstack`_.
-
-How to build the plugin
-+++++++++++++++++++++++
-
-Please refer to the `Fuel Plugins wiki`_ to build the plugin
-by yourself, version 2.0.0 (or higher) of the Fuel Plugin Builder is
-required.
-
-.. code:: bash
-
-    git clone https://github.com/openstack/fuel-plugin-openbook.git
-    cd fuel-plugin-openbook
-    git checkout 7.0
-    fpb --build .
+Installation Guide
+==================
 
 How to install the plugin
-+++++++++++++++++++++++++
+-------------------------
 
-Copy the plugin file to the Fuel Master node.
+Please refer to the `Install Fuel Plugins <https://docs.mirantis.com/openstack/fuel/fuel-7.0/user-guide.html#install-plugin>`_ section from the User Guide for installation
+of the plugin.  You can also refer to the `CLI command reference for Fuel Plugins <https://docs.mirantis.com/openstack/fuel/fuel-7.0/user-guide.html#fuel-plugins-cli>`_.
 
-.. code:: bash
+#. Copy the plugin file to the Fuel Master node.
 
-    scp openbook*rpm root@<Fuel Master node IP address>:
+   .. code:: bash
 
-Install the plugin using the fuel command line:
+       scp openbook*rpm root@<Fuel Master node IP address>:
 
-.. code:: bash
+#. Install the plugin using the fuel command line:
 
-    ssh root@<Fuel Master node IP address>
-    fuel plugins --install openbook*.rpm
+   .. code:: bash
 
-Verify that the plugin is installed correctly:
+       ssh root@<Fuel Master node IP address>
+       fuel plugins --install openbook*.rpm
 
-.. code:: bash
+#. Verify that the plugin is installed correctly:
 
-    [root@fuel ~]# fuel plugins --list
-    id | name     | version | package_version
-    ---|----------|---------|----------------
-    2  | openbook | 1.1.0   | 3.0.0          
+   .. code:: bash
 
-
-**********
-References
-**********
-
-.. target-notes::
-.. _github openstack: https://github.com/openstack/fuel-plugin-openbook
-.. _Fuel Plugins wiki: https://wiki.openstack.org/wiki/Fuel/Plugins
+       [root@fuel ~]# fuel plugins
+       id | name     | version | package_version
+       ---|----------|---------|----------------
+       1  | openbook | 1.1.0   | 3.0.0         
