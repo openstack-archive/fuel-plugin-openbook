@@ -32,6 +32,7 @@ budget.  Detailed reports of growth trends, utilization, and seasonal patterns a
 you to better plan for new capacity.
 
 .. _plugin_requirements:
+
 Requirements
 ------------
 
