@@ -4,6 +4,9 @@ Installation Guide
 How to install the plugin
 -------------------------
 
+Per the :ref:`Requirements section <plugin_requirements>`, `Contact Talligent <mailto:openbook@talligent.com>`_ to get access to the 
+Talligent Sharefile account for downloading Openbook and the Openbook 'How to guide'.
+
 Please refer to the `Install Fuel Plugins <https://docs.mirantis.com/openstack/fuel/fuel-7.0/user-guide.html#install-plugin>`_ section from the User Guide for installation
 of the plugin.  You can also refer to the `CLI command reference for Fuel Plugins <https://docs.mirantis.com/openstack/fuel/fuel-7.0/user-guide.html#fuel-plugins-cli>`_.
 

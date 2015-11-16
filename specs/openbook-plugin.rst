@@ -56,6 +56,8 @@ It also might be implemented as a Heat template.
 Data model impact
 -----------------
 
+None
+
 REST API impact
 ---------------
 
@@ -69,6 +71,8 @@ install a new version of plugin which supports new Fuel release.
 
 Security impact
 ---------------
+
+None
 
 Notifications impact
 --------------------
@@ -92,8 +96,12 @@ require a dual-core server with 4GB of RAM and at least 500GB of disk.
 Other deployer impact
 ---------------------
 
+None
+
 Developer impact
 ----------------
+
+None
 
 Implementation
 ==============
