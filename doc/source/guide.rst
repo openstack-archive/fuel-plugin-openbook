@@ -8,9 +8,6 @@ User Guide
 Plugin configuration
 --------------------
 
-`Contact Talligent <mailto:openbook@talligent.com>`_ to get access to the 
-Talligent Sharefile account for downloading Openbook and the Openbook User Guide.
-
 #. `Create a new environment <https://docs.mirantis.com/openstack/fuel/fuel-7.0/user-guide.html#launch-wizard-to-create-new-environment>`_
    with the Fuel UI wizard.  At the moment only the Ubuntu distribution is supported.
 
@@ -24,7 +21,7 @@ Talligent Sharefile account for downloading Openbook and the Openbook User Guide
 #. Click on the Settings tab of the Fuel web UI.
 
    Select the "Openbook Plugin" tab, enable the plugin by clicking on the
-   "Openbook Plugin" checkbox and fill-in the required fields:
+   "Openbook Plugin" checkbox and fill-in the required fields (default for 'database password' is Tall!g3nt):
 
    .. image:: _static/plugin-openbook-config_s.png
       :alt: A screenshot of the Openbook Plugin settings UI for 7.0
