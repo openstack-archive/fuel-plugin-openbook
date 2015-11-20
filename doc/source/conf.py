@@ -229,7 +229,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'fuel-plugin-openbook', u'Guide to the Openbook Plugin ver. 1.1.0 for Fuel',
+    ('index', 'fuel-plugin-openbook', u'Guide to the Openbook Plugin ver. 1.1-1.1.0-1 for Fuel',
      [u'Talligent Inc.'], 1)
 ]
 
