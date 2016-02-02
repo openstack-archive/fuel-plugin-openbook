@@ -1,4 +1,5 @@
-# The Openbook Plugin
+The Openbook Plugin
+===================
 
 This plugin extends Mirantis OpenStack functionality by adding Openbook customer
 onboarding, self-service, and cloud billing / charge-back services. Openbook is cloud
@@ -28,9 +29,26 @@ Managers are automatically updated on their cloud costs as well as performance a
 budget.  Detailed reports of growth trends, utilization, and seasonal patterns allow
 you to better plan for new capacity.
 
+<<<<<<< HEAD
 ## Requirements
 | Requirement                      | Version/Comment                           |
 |----------------------------------|-------------------------------------------|
 | Mirantis OpenStack compatility   | 7.0                                       |
+=======
+Requirements
+++++++++++++
+
++----------------------------------+-------------------------------------------+
+| Requirement                      | Version/Comment                           |
++==================================+===========================================+
+| Mirantis OpenStack compatility   | 6.1 or higher                             |
++----------------------------------+-------------------------------------------+
+>>>>>>> 4aa5a60... Revert "branched off for 6.1; removed all 7.0-related material"
 | Distribution Supported           | Ubuntu                                    |
++----------------------------------+-------------------------------------------+
 | Talligent Sharefile access       | Contact openbook@talligent.com for access |
+<<<<<<< HEAD
+=======
++----------------------------------+-------------------------------------------+
+
+>>>>>>> 4aa5a60... Revert "branched off for 6.1; removed all 7.0-related material"
