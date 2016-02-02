@@ -4,15 +4,7 @@ title: Openbook Plugin
 version: '1.1.0'
 description: Deploys Openbook for billing/invoicing and customer lifecycle management for OpenStack. Openbook URL schema is https://<VIP>:8443/Openbook
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 fuel_version: ['7.0']
-=======
-fuel_version: ['6.1']
->>>>>>> 0c34711... branched off for 6.1; removed all 7.0-related material
-=======
-fuel_version: ['6.1', '7.0']
->>>>>>> 4aa5a60... Revert "branched off for 6.1; removed all 7.0-related material"
 licenses: ['Apache License Version 2.0']
 authors: ['Talligent Inc.']
 homepage: 'https://github.com/openstack/fuel-plugin-openbook'
@@ -21,21 +13,8 @@ groups: ['monitoring']
 # The plugin is compatible with releases in the list
 releases:
   - os: ubuntu
-<<<<<<< HEAD
-<<<<<<< HEAD
     version: 2015.1.0-7.0
     mode: ['ha']
-=======
-=======
-    version: 2015.1.0-7.0
-    mode: ['ha']
-    deployment_scripts_path: deployment_scripts/
-    repository_path: repositories/ubuntu
-  - os: ubuntu
->>>>>>> 4aa5a60... Revert "branched off for 6.1; removed all 7.0-related material"
-    version: 2014.2-6.1
-    mode: ['ha', 'multinode']
->>>>>>> 0c34711... branched off for 6.1; removed all 7.0-related material
     deployment_scripts_path: deployment_scripts/
     repository_path: repositories/ubuntu
 
