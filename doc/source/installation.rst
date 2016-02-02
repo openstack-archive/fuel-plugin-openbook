@@ -23,10 +23,14 @@ required.
 .. code:: bash
 
     git clone https://github.com/openstack/fuel-plugin-openbook.git
+<<<<<<< HEAD
     cd fuel-plugin-openbook
     git checkout 6.1
     fpb --build .
 >>>>>>> 0c34711... branched off for 6.1; removed all 7.0-related material
+=======
+    fpb --build fuel-plugin-openbook
+>>>>>>> 4aa5a60... Revert "branched off for 6.1; removed all 7.0-related material"
 
 How to install the plugin
 -------------------------
@@ -35,11 +39,16 @@ Per the :ref:`Requirements section <plugin_requirements>`, `Contact Talligent <m
 Talligent Sharefile account for downloading Openbook and the Openbook 'How to guide'.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Please refer to the `Install Fuel Plugins <https://docs.mirantis.com/openstack/fuel/fuel-7.0/user-guide.html#install-plugin>`_ section from the User Guide for installation
 of the plugin.  You can also refer to the `CLI command reference for Fuel Plugins <https://docs.mirantis.com/openstack/fuel/fuel-7.0/user-guide.html#fuel-plugins-cli>`_.
 =======
     scp openbook*rpm root@<Fuel Master node IP address>:
 >>>>>>> 0c34711... branched off for 6.1; removed all 7.0-related material
+=======
+    cd fuel-plugin-openbook
+    scp fuel-plugin-openbook*rpm root@<Fuel Master node IP address>:
+>>>>>>> 4aa5a60... Revert "branched off for 6.1; removed all 7.0-related material"
 
 #. Copy the plugin file to the Fuel Master node.
 
@@ -49,13 +58,18 @@ of the plugin.  You can also refer to the `CLI command reference for Fuel Plugin
        scp openbook*rpm root@<Fuel Master node IP address>:
 =======
     ssh root@<Fuel Master node IP address>
+<<<<<<< HEAD
     fuel plugins --install openbook*.rpm
 >>>>>>> 0c34711... branched off for 6.1; removed all 7.0-related material
+=======
+    fuel plugins --install fuel-plugin-openbook*.rpm
+>>>>>>> 4aa5a60... Revert "branched off for 6.1; removed all 7.0-related material"
 
 #. Install the plugin using the fuel command line:
 
    .. code:: bash
 
+<<<<<<< HEAD
 <<<<<<< HEAD
        ssh root@<Fuel Master node IP address>
        fuel plugins --install openbook*.rpm
@@ -65,6 +79,12 @@ of the plugin.  You can also refer to the `CLI command reference for Fuel Plugin
     ---|----------|---------|----------------
     1  | openbook | 1.0.0   | 2.0.0          
 >>>>>>> 0c34711... branched off for 6.1; removed all 7.0-related material
+=======
+    [root@fuel ~]# fuel plugins --list
+    id | name                 | version | package_version
+    ---|----------------------|---------|----------------
+    2  | fuel-plugin-openbook | 1.0.0   | 2.0.0          
+>>>>>>> 4aa5a60... Revert "branched off for 6.1; removed all 7.0-related material"
 
 #. Verify that the plugin is installed correctly:
 
