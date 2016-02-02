@@ -16,6 +16,7 @@ $openbook = hiera('openbook')
 
 # Check that JVM size doesn't exceed the physical RAM size
 $jvmsize_mb = ($openbook['jvm_heap_size'] + 0.0) * 1024
-if $jvmsize_mb >= $::memorysize_mb {
-  fail("The configured JVM size (${ $openbook['jvm_heap_size'] } GB) is greater than the total amount of RAM of the system (${ ::memorysize }).")
+$available_mb = $::memorysize_mb - 256
+if $jvmsize_mb > $available_mb {
+  fail("The configured JVM size (${ $openbook['jvm_heap_size'] } GB) is greater than the total amount of RAM available on the system (${ $available_mb } of ${ ::memorysize_mb }).")
 }

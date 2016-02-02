@@ -14,8 +14,4 @@
 notice('MODULAR: finalize.pp')
 $openbook_hash = hiera('openbook')
 
-if $openbook_hash['node_name'] == hiera('user_node_name') {
-    class {'openbook::finalize': }
-}
-
-
+class {'openbook::finalize': }

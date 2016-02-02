@@ -1,127 +1,150 @@
-************************************************************
-Guide to the Openbook Plugin version 1.0 for Fuel
-************************************************************
+..
+ This work is licensed under a Creative Commons Attribution 3.0 Unported
+ License.
 
-This document provides instructions for installing, configuring and using
-Openbook plugin for Fuel.
+ http://creativecommons.org/licenses/by/3.0/legalcode
 
-# As Plugin Guide can have detailed instructions, make a separate file from every
-# section below and add them using 'include'. For example files
-# structure scheme, see https://wiki.openstack.org/wiki/Fuel/Plugins#Documentation_files_structure
+===================================================
+Guide to the Openbook Plugin version 1.1.0 for Fuel
+===================================================
 
-Key terms, acronyms and abbreviations
-=====================================
+This plugin extends Mirantis OpenStack functionality by adding Openbook customer 
+onboarding, self-service, and cloud billing / charge-back services. Openbook is cloud 
+management and reporting software that simplifies the tasks of planning, charging, 
+and predicting capacity requirements for cloud services.  Talligent gives the 
+administrator and tenant real-time visibility of resources and accrued costs, as well 
+as the ability to scale up or down according to budget and resource requirements.  
 
-Term1
-    Provides ....
+For the Service Provider:  Openbook by Talligent is the quickest path to monetizing 
+OpenStack services.  Openbook enables service providers to sell on demand cloud services 
+based on the OpenStack platform, including dedicated instances, networks, storage, 
+applications, virtual desktops, and other infrastructure elements or services.  Services 
+can be packaged the way you want:  by tiers, metered and sold by the hour, delivered 
+on-site or as part of a shared infrastructure. Cloud service providers can expand their 
+customer reach and strengthen their existing relationship via resellers. Openbook natively 
+supports reseller workflow with corresponding rate plans that support taxation, currency 
+conversion, proration, discounts, and promotional codes independent from the master 
+service provider. 
 
-Abbreviation1
-    Provides ....
+For the Enterprise: Without visibility into the growth of cloud services by department, 
+it is difficult to accurately predict how much new capacity to add, and when.  Openbook 
+is designed to quickly answer key management questions about the environment – largest 
+tenants, host utilization, service growth, and project costs.  Openbook has a robust 
+ratings engine tuned to OpenStack and VMware clouds to support hybrid cloud reporting.  
+Costs can be assigned by tenant, business unit, VP, project, or other cost center.  
+Managers are automatically updated on their cloud costs as well as performance against 
+budget.  Detailed reports of growth trends, utilization, and seasonal patterns allow 
+you to better plan for new capacity.
 
-<Plugin name>
-=============
+Problem description
+===================
 
-Provide common information about the plugin (what functionality it
-provides, what component it extends). You can also add schemes with
-a detailed explanation of plugin architecture.
+Cloud owners need a tool to simplify the planning, charging, and predicting capacity
+requirements for cloud services.
 
-License
--------
+Proposed change
+===============
 
-If your plugin contains any components,
-please provide the list of those with licenses.
-If no extra components are present (e.g. like in VPNaaS plugin),
-provide a short note (like ‘No components are present’).
+Implement a Fuel plugin which will deploy Openbook and configure it to connect to a
+Mirantis OpenStack environment.
 
-=======================   ==================
-Component                  License type
-=======================   ==================
-Component1                   
-Component2
-============================================
-
-
-Requirements
+Alternatives
 ------------
 
-=======================   ==================
-Requirement                 Version/Comment
-=======================   ==================
-Fuel                         6.x
-Component1                   
-Component2
-============================================
+It also might be implemented as a Heat template.
 
-Limitations
+Data model impact
+-----------------
+
+None
+
+REST API impact
+---------------
+
+Openbook gathers data by connecting to the OpenStack API endpoints.
+
+Upgrade impact
+--------------
+
+Fuel currently supports upgrading of Fuel Master node, so it is necessary to
+install a new version of plugin which supports new Fuel release.
+
+Security impact
+---------------
+
+None
+
+Notifications impact
+--------------------
+
+Openbook sends e-mails to project users with detailed monthly usage (invoices).
+
+Other end user impact
+---------------------
+
+Openbook plugin uses Fuel pluggable architecture.
+After it is installed, the user can enable the plugin on the Setting tab of the Fuel web UI
+and customize plugins settings.
+
+Performance Impact
+------------------
+
+The hardware configuration (RAM, CPU, disk) required by this plugin
+depends on the size of your cloud, but a typical setup would at least
+require a dual-core server with 4GB of RAM and at least 500GB of disk.
+
+Other deployer impact
+---------------------
+
+None
+
+Developer impact
+----------------
+
+None
+
+Implementation
+==============
+
+Assignee(s)
 -----------
 
-Provide information about requirements
-(for example, what component version is supported, what software
-dependencies, hardware and resources like disk space and CPU are required).
+Primary assignee:
 
-Installation Guide
-==================
+- Jeremy fluhmann <jeremy@talligent.com> - developer
 
-Provide step-by-step instructions for plugin installation.
-If plugin requires pre-installation steps like backend configuration,
-you should also add this information here. 
+Other contributors:
 
-<Plugin name> backend configuration
------------------------------------
+- Stepan Rogov <srogov@mirantis.com> - developer
+- Vyacheslav Struk <vstruk@mirantis.com> - developer
+- Irina Povolotskaya <ipovolotskaya@mirantis.com> - technical writer
 
-To configure <name> backend, follow these steps:
+Work Items
+----------
 
-#. Do <>.
+* Create Fuel plugin bundle, which contains deployments scripts, puppet modules and metadata
+* Implement puppet manifests for deploying and configuring Openbook
+* Test Openbook plugin
+* Create Documentation
 
-#. Configure <>.
 
-<Plugin name> installation
---------------------------
-
-To install <plugin name> plugin, follow these steps:
-
-#. Do <>.
-
-#. Configure <>.
-
-User Guide
-==========
-
-Provide instructions for using and operating this plugin,
-including commands and their output, logs and troubleshooting
-information.
-
-How to <>
----------
-
-To <>, follow these steps:
-
-#. ...
-
-#. ...
-
-How to <>
----------
-
-To <>, follow these steps:
-
-#. ...
-
-#. ...
-
-Known issues
+Dependencies
 ============
 
-If present, provide information about known
-issues and workarounds. You can also add links to LaunchPad under each issue.
+* Fuel 7.0
+* Talligent Sharefile access
 
-Appendix
-========
+Testing
+=======
 
-Provide any links to external resources or documentation here.
-#. Link 1
-#. Link 2
+* Prepare a test plan
+* Test the plugin by deploying environments with all Fuel deployment modes
 
+Documentation Impact
+====================
 
-
+* Deployment Guide
+* User Guide (which features the plugin provides, how to use them in the deployed OpenStack environment)
+* Test Plan
+* Test Report
 

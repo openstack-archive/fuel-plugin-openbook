@@ -8,7 +8,7 @@
     # Should be true if network role requires gateway being set
     gateway: false
     vip:
-       - name: "openbook_vip_public"
+       - name: "openbook_public"
          namespace: "haproxy"
-         node_roles: ["base-os"]
+         node_roles: ["openbook"]
 
