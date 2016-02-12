@@ -1,0 +1,8 @@
+Code-Review+2: Jeremy Fluhmann <fluhmann@gmail.com>
+Workflow+1: Jeremy Fluhmann <fluhmann@gmail.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Fri, 12 Feb 2016 00:05:33 +0000
+Reviewed-on: https://review.openstack.org/279328
+Project: openstack/fuel-plugin-openbook
+Branch: refs/heads/master
