@@ -22,26 +22,15 @@ class openbook::finalize {
   $keystone_admin_url   = "http://${management_vip}:35357/v2.0"
   $os_auth_url    = "http://${management_vip}:5000/v2.0"
   
-  $fuel_version = hiera('fuel_version')
-
-  case $fuel_version {
-    '6.1': {
-      $keystone_client  = 'python-keystoneclient'
-      $keystone_command = 'keystone'
-      $keystone_args    = 'tenant-get admin'
-    }
-    default: { # or '7.0'
-      $keystone_client  = 'python-openstackclient'
-      $keystone_command = 'openstack'
-      $keystone_args    = 'project show admin'
-      
-      $public_ssl_hash = hiera('public_ssl')
-      $ip = hiera('public_vip')
-      
-      # Need to add trust chain so that Openbook can talk to https endpoints
-      class { 'openbook::ssl_add_trust_chain': }
-    }
-  } ->
+  $keystone_client  = 'python-openstackclient'
+  $keystone_command = 'openstack'
+  $keystone_args    = "project show ${admin_tenant}"
+  
+  $public_ssl_hash = hiera('public_ssl')
+  $ip = hiera('public_vip')
+  
+  # Need to add trust chain so that Openbook can talk to https endpoints
+  class { 'openbook::ssl_add_trust_chain': }->
   
   package { "$keystone_client":
     ensure => present

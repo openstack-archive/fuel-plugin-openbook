@@ -6,4 +6,7 @@
     - globals
     - netconfig
   required_for: [deploy_end]
-  requires: [deploy_start]
+  requires: [deploy_start,controller]
+  parameters:
+    strategy:
+      type: parallel
