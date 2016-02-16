@@ -5,3 +5,5 @@ repositories/centos/*
 repositories/ubuntu/*
 *.rpm
 doc/build
+deployment_scripts/puppet/modules/stdlib
+deployment_scripts/puppet/modules/apt

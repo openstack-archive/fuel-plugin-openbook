@@ -42,18 +42,20 @@ class openbook::db::mysql {
     ensure  => present,
     require => Exec['mariadb update']
   }
-  
   service { 'mysql':
     ensure => running,
     enable => true,
     require => Package[$openbook::params::db_server_pkg]
   }
-  
+  exec { 'mysql_set_binlog_format':
+    notify      => Service['mysql'],
+    path        => '/bin:/sbin:/usr/bin:/usr/sbin',
+    command     => 'sed -i "/\[mysqld\]/a\binlog_format = MIXED" /etc/mysql/my.cnf'
+  }
   file { '/tmp/openbook':
     ensure => directory,
     mode   => '0755'
   }
-  
   file { '/tmp/openbook/create_openbook_schemas.sql':
     ensure    => present,
     require   => File['/tmp/openbook'],

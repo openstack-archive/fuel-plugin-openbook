@@ -8,7 +8,7 @@ TENANT_ID=$($KEYSTONE_COMMAND $KEYSTONE_ARGS | grep id | awk -F\| '{print $3}' |
 read -d '' METADATA <<EOF
 metadata={
   "resourceSyncEnabled": "true",
-  "resourceSyncFrequency": "5",
+  "resourceSyncFrequency": "5 minutes",
   "associatedProvider": "1",
   "periodicFullSyncEnabled": false,
   "periodicFullSyncInterval": "24",
@@ -16,11 +16,11 @@ metadata={
     "connectionUrl": "<%= @keystone_admin_url %>",
     "userName": "<%= @admin_username %>",
     "adminTenantId": "$TENANT_ID",
+    "keystoneVersion": "2",
     "password": "<%= @admin_password %>",
     "isMemberOfAllProjects": false
   },
   "usageMetrics": [
-    
   ],
   "tenantsToIgnore": "",
   "regionsToSync": "RegionOne",
@@ -39,7 +39,7 @@ metadata={
 }
 EOF
 
-RESULT=$(curl -s -k --user 'openbook:Tall!g3nt' -XPOST -D - 'https://<%= @ipaddress %>:8443/Openbook/resource/resourcemanagers' -H 'Content-Type: application/x-www-form-urlencoded' -d 'name=MOS Environment' -d 'description=Mirantis OpenStack Environment' -d 'vendorType=OpenStack' --data-urlencode "$METADATA")
+RESULT=$(curl -s -k --user 'openbook:Tall!g3nt' -XPOST -D - 'https://<%= @ipaddress %>:8443/Openbook/resource/serviceManagers' -H 'Content-Type: application/x-www-form-urlencoded' -d 'name=MOS Environment' -d 'description=Mirantis OpenStack Environment' -d 'type=OpenStack' --data-urlencode "$METADATA")
 
 echo "$RESULT" >> /tmp/resource_manager_result.txt
 

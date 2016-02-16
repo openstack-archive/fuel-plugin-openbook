@@ -27,19 +27,17 @@ class openbook::params {
   $management_vip = hiera('management_vip')
   $keystone_admin_url   = "http://${management_vip}:35357/v2.0"
   $os_auth_url    = "http://${management_vip}:5000/v2.0"
-  
   $jvm_heap = $openbook['jvm_heap_size']
-  
   case $::operatingsystem {
     'Ubuntu', 'Debian': {
       $db_server_pkg             = 'mariadb-server-10.0'
       $db_client_pkg             = 'mariadb-client-core-10.0'
       $db_password               = 'Tall!g3nt'
       $app_server_pkg            = 'tomcat7'
+      $java_pkg                  = 'openjdk-8-jdk'
       $openbook_version          = '2.5.245'
       $keystore_pass             = 'rG8EE69CC0OuQKW+6pC6LytgRQM7QZUmt5CDySUgupY='
       $ipaddress                 = $::ipaddress
-      
       $sharefile_hostname        = 'talligent.sharefile.com'
       $sharefile_username        = $openbook['sharefile_user']
       $sharefile_password        = $openbook['sharefile_pass']
