@@ -16,8 +16,17 @@
 class openbook::tomcat::server {
 
   include openbook::params
+  include apt
   $ipaddress = $::ipaddress
-
+  
+  apt::ppa { 'ppa:openjdk-r/ppa':} ->
+  package { "$openbook::params::java_pkg":
+    ensure => present,
+  }->  
+  file { '/usr/lib/jvm/default-java':
+    ensure => 'link',
+    target => '/usr/lib/jvm/java-8-openjdk-amd64',
+  }->
   package { "$openbook::params::app_server_pkg":
     ensure => present,
   }

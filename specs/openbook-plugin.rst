@@ -5,7 +5,7 @@
  http://creativecommons.org/licenses/by/3.0/legalcode
 
 ===================================================
-Guide to the Openbook Plugin version 1.1.0 for Fuel
+Guide to the Openbook Plugin version 1.2.0 for Fuel
 ===================================================
 
 This plugin extends Mirantis OpenStack functionality by adding Openbook customer 

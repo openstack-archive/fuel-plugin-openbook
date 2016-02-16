@@ -30,4 +30,4 @@ of the plugin.  You can also refer to the `CLI command reference for Fuel Plugin
        [root@fuel ~]# fuel plugins
        id | name     | version | package_version
        ---|----------|---------|----------------
-       1  | openbook | 1.1.0   | 3.0.0         
+       1  | openbook | 1.2.0   | 3.0.0         
