@@ -17,36 +17,63 @@ class openbook::db::mysql {
 
   include openbook::params
 
-  exec {'import mariadb repo key':
-    command => '/usr/bin/apt-key --keyring /etc/apt/trusted.gpg.d/mariadb.gpg adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xcbcb082a1bb943db',
-    unless  => '/usr/bin/test -f /etc/apt/trusted.gpg.d/mariadb.gpg'
-  }
-
-  file { 'mariadb.list':
-    path    => '/etc/apt/sources.list.d/mariadb.list',
-    content => "deb http://ftp.osuosl.org/pub/mariadb/repo/10.0/ubuntu ${::lsbdistcodename} main",
-  }
-
-  exec { "mariadb update":
-    command     => "/usr/bin/apt-get update",
-    subscribe   => File['mariadb.list'],
-    refreshonly => true,
-    require => File['/etc/apt/sources.list.d/mariadb.list']
+  #exec {'import mariadb repo key':
+  #  command => '/usr/bin/apt-key --keyring /etc/apt/trusted.gpg.d/mariadb.gpg adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xcbcb082a1bb943db',
+  #  unless  => '/usr/bin/test -f /etc/apt/trusted.gpg.d/mariadb.gpg'
+  #}
+  #
+  #file { 'mariadb.list':
+  #  path    => '/etc/apt/sources.list.d/mariadb.list',
+  #  content => "deb http://ftp.osuosl.org/pub/mariadb/repo/10.0/ubuntu ${::lsbdistcodename} main",
+  #}
+  #
+  #exec { "mariadb update":
+  #  command     => "/usr/bin/apt-get update",
+  #  subscribe   => File['mariadb.list'],
+  #  refreshonly => true,
+  #  require => File['/etc/apt/sources.list.d/mariadb.list']
+  #}
+  #
+  #package { "$openbook::params::db_server_pkg":
+  #  ensure => present,
+  #  require  => Exec['mariadb update']
+  #}
+  #package { "$openbook::params::db_client_pkg":
+  #  ensure  => present,
+  #  require => Exec['mariadb update']
+  #}
+  #
+  #service { 'mysql':
+  #  ensure => running,
+  #  enable => true,
+  #  require => Package[$openbook::params::db_server_pkg]
+  #}
+  
+  class { 'mariadbrepo':
+    version => "$openbook::params::db_version"
   }
   
-  package { "$openbook::params::db_server_pkg":
+  package { "$openbook::params::db_server_pkg" :
     ensure => present,
-    require  => Exec['mariadb update']
+    require => Class['mariadbrepo']
   }
-  package { "$openbook::params::db_client_pkg":
-    ensure  => present,
-    require => Exec['mariadb update']
+  
+  package { "$openbook::params::db_client_pkg" :
+    ensure => present,
+    require => Class['mariadbrepo']
   }
   
   service { 'mysql':
     ensure => running,
     enable => true,
-    require => Package[$openbook::params::db_server_pkg]
+    require => Package["$openbook::params::db_server_pkg"]
+  }
+  
+  exec { 'mysql_set_binlog_format':
+    notify      => Service['mysql'],
+    path        => '/bin:/sbin:/usr/bin:/usr/sbin',
+    command     => 'sed -i "/\[mysqld\]/a\binlog_format = MIXED" /etc/mysql/my.cnf',
+    require     => Package["$openbook::params::db_server_pkg"]
   }
   
   file { '/tmp/openbook':
@@ -64,7 +91,7 @@ class openbook::db::mysql {
     command     => "/usr/bin/mysql -p'${openbook::params::db_password}' < /tmp/openbook/create_openbook_schemas.sql && /usr/bin/touch /root/.schema.created",
     logoutput   => true,
     unless      => '/usr/bin/test -f /root/.schema.created',
-    require     => [File['/tmp/openbook/create_openbook_schemas.sql'], Package[$openbook::params::db_server_pkg]]
+    require     => [File['/tmp/openbook/create_openbook_schemas.sql'], Package[$openbook::params::db_server_pkg], Exec['mysql_root_password']]
   }
   
   file { '/root/.my.cnf':
