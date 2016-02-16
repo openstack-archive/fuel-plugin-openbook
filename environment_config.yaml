@@ -1,11 +1,11 @@
 attributes:
-  metadata:
-    restrictions:
-        - condition: "settings:additional_components.ceilometer.value == false"
-          strict: true
-          message: "Ceilometer (OpenStack Telemetry) is required and must be enabled in the environment"
-          action: "disable"
-  
+#  metadata:
+#    restrictions:
+#        - condition: "settings:additional_components.ceilometer.value == false"
+#          strict: true
+#          message: "Ceilometer (OpenStack Telemetry) is required and must be enabled in the environment"
+#          action: "disable"
+#  
   openbook_text:
     value: 'Openbook Fuel Plugin'
     label: 'Openbook plugin'
