@@ -3,61 +3,255 @@ set -eux
 
 . "$(dirname "$(readlink -f "$0")")"/functions.sh
 
-# Packages needed for MariaDB
-download_package http://ftp.osuosl.org/pub/mariadb/repo/10.0/ubuntu/pool/main/m/mariadb-10.0/mysql-common_10.0.22+maria-1~trusty_all.deb \
-http://ftp.osuosl.org/pub/mariadb/repo/10.0/ubuntu/pool/main/m/mariadb-10.0/mariadb-common_10.0.22+maria-1~trusty_all.deb \
-http://ftp.osuosl.org/pub/mariadb/repo/10.0/ubuntu/pool/main/m/mariadb-10.0/libmariadbclient18_10.0.22+maria-1~trusty_amd64.deb \
-http://ftp.osuosl.org/pub/mariadb/repo/10.0/ubuntu/pool/main/m/mariadb-10.0/libmysqlclient18_10.0.22+maria-1~trusty_amd64.deb \
-http://ftp.osuosl.org/pub/mariadb/repo/10.0/ubuntu/pool/main/m/mariadb-10.0/mariadb-client-core-10.0_10.0.22+maria-1~trusty_amd64.deb \
-http://ftp.osuosl.org/pub/mariadb/repo/10.0/ubuntu/pool/main/m/mariadb-10.0/mariadb-client-10.0_10.0.22+maria-1~trusty_amd64.deb \
-http://ftp.osuosl.org/pub/mariadb/repo/10.0/ubuntu/pool/main/m/mariadb-10.0/mariadb-server-core-10.0_10.0.22+maria-1~trusty_amd64.deb \
-http://ftp.osuosl.org/pub/mariadb/repo/10.0/ubuntu/pool/main/m/mariadb-10.0/mariadb-server-10.0_10.0.22+maria-1~trusty_amd64.deb \
-http://archive.ubuntu.com/ubuntu/pool/main/liba/libaio/libaio1_0.3.109-4_amd64.deb \
-http://archive.ubuntu.com/ubuntu/pool/main/libd/libdbi-perl/libdbi-perl_1.630-1_amd64.deb \
-http://archive.ubuntu.com/ubuntu/pool/main/libd/libdbd-mysql-perl/libdbd-mysql-perl_4.025-1_amd64.deb \
-http://archive.ubuntu.com/ubuntu/pool/main/libh/libhtml-template-perl/libhtml-template-perl_2.95-1_all.deb
+# Puppet manifests
+APT_TARBALL_URL="https://forgeapi.puppetlabs.com/v3/files/puppetlabs-apt-2.2.1.tar.gz"
+STDLIB_TARBALL_URL="https://forgeapi.puppetlabs.com/v3/files/puppetlabs-stdlib-4.11.0.tar.gz"
+MARIADBREPO_TARBALL_URL="https://forgeapi.puppet.com/v3/files/yguenane-mariadbrepo-0.2.1.tar.gz"
+
+# Packages needed for MariaDB (mariadb-server)
+#download_package http://ftp.osuosl.org/pub/mariadb/repo/10.0/ubuntu/pool/main/m/mariadb-10.0/mysql-common_10.0.25+maria-1~trusty_all.deb \
+#ttp://ftp.osuosl.org/pub/mariadb/repo/10.0/ubuntu/pool/main/m/mariadb-10.0/mariadb-common_10.0.25+maria-1~trusty_all.deb \
+#http://ftp.osuosl.org/pub/mariadb/repo/10.0/ubuntu/pool/main/m/mariadb-10.0/libmariadbclient18_10.0.25+maria-1~trusty_amd64.deb \
+#http://ftp.osuosl.org/pub/mariadb/repo/10.0/ubuntu/pool/main/m/mariadb-10.0/libmysqlclient18_10.0.25+maria-1~trusty_amd64.deb \
+#http://ftp.osuosl.org/pub/mariadb/repo/10.0/ubuntu/pool/main/m/mariadb-10.0/mariadb-client-core-10.0_10.0.25+maria-1~trusty_amd64.deb \
+#http://ftp.osuosl.org/pub/mariadb/repo/10.0/ubuntu/pool/main/m/mariadb-10.0/mariadb-client-10.0_10.0.25+maria-1~trusty_amd64.deb \
+#http://ftp.osuosl.org/pub/mariadb/repo/10.0/ubuntu/pool/main/m/mariadb-10.0/mariadb-server-core-10.0_10.0.25+maria-1~trusty_amd64.deb \
+#http://ftp.osuosl.org/pub/mariadb/repo/10.0/ubuntu/pool/main/m/mariadb-10.0/mariadb-server-10.0_10.0.25+maria-1~trusty_amd64.deb \
+#http://ftp.osuosl.org/pub/mariadb/repo/10.0/ubuntu/pool/main/m/mariadb-10.0/mariadb-server_10.0.25+maria-1~trusty_all.deb \
+#http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/liba/libaio/libaio1_0.3.109-4_amd64.deb \
+#http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/r/readline5/libreadline5_5.2+dfsg-2_amd64.deb \
+#http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/libd/libdbi-perl/libdbi-perl_1.630-1_amd64.deb \
+#http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/libd/libdbd-mysql-perl/libdbd-mysql-perl_4.025-1_amd64.deb \
+#http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/libh/libhtml-template-perl/libhtml-template-perl_2.95-1_all.deb
+
 
 # Packages needed for Tomcat
-download_package http://archive.ubuntu.com/ubuntu/pool/main/liba/libasyncns/libasyncns0_0.8-4ubuntu2_amd64.deb \
-http://archive.ubuntu.com/ubuntu/pool/main/a/avahi/libavahi-common-data_0.6.31-4ubuntu1_amd64.deb \
-http://archive.ubuntu.com/ubuntu/pool/main/a/avahi/libavahi-common3_0.6.31-4ubuntu1_amd64.deb \
-http://archive.ubuntu.com/ubuntu/pool/main/a/avahi/libavahi-client3_0.6.31-4ubuntu1_amd64.deb \
-http://archive.ubuntu.com/ubuntu/pool/main/c/cups/libcups2_1.7.2-0ubuntu1.6_amd64.deb \
-http://archive.ubuntu.com/ubuntu/pool/main/libo/libogg/libogg0_1.3.1-1ubuntu1_amd64.deb \
-http://archive.ubuntu.com/ubuntu/pool/main/f/flac/libflac8_1.3.0-2ubuntu0.14.04.1_amd64.deb \
-http://archive.ubuntu.com/ubuntu/pool/main/f/fonts-dejavu/fonts-dejavu-core_2.34-1ubuntu1_all.deb \
-http://archive.ubuntu.com/ubuntu/pool/main/f/fontconfig/fontconfig-config_2.11.0-0ubuntu4.1_all.deb \
-http://archive.ubuntu.com/ubuntu/pool/main/f/fontconfig/libfontconfig1_2.11.0-0ubuntu4.1_amd64.deb \
-http://archive.ubuntu.com/ubuntu/pool/main/libj/libjpeg-turbo/libjpeg-turbo8_1.3.0-0ubuntu2_amd64.deb \
-http://archive.ubuntu.com/ubuntu/pool/main/l/lcms2/liblcms2-2_2.5-0ubuntu4_amd64.deb \
-http://archive.ubuntu.com/ubuntu/pool/main/n/nspr/libnspr4_4.10.7-0ubuntu0.14.04.1_amd64.deb \
-http://archive.ubuntu.com/ubuntu/pool/main/n/nss/libnss3-nssdb_3.19.2-0ubuntu0.14.04.1_all.deb \
-http://archive.ubuntu.com/ubuntu/pool/main/n/nss/libnss3_3.19.2-0ubuntu0.14.04.1_amd64.deb \
-http://archive.ubuntu.com/ubuntu/pool/main/p/pcsc-lite/libpcsclite1_1.8.10-1ubuntu1_amd64.deb \
-http://archive.ubuntu.com/ubuntu/pool/main/libv/libvorbis/libvorbis0a_1.3.2-1.3ubuntu1_amd64.deb \
-http://archive.ubuntu.com/ubuntu/pool/main/libv/libvorbis/libvorbisenc2_1.3.2-1.3ubuntu1_amd64.deb \
-http://archive.ubuntu.com/ubuntu/pool/main/libs/libsndfile/libsndfile1_1.0.25-7ubuntu2_amd64.deb \
-http://archive.ubuntu.com/ubuntu/pool/main/p/pulseaudio/libpulse0_4.0-0ubuntu11.1_amd64.deb \
-http://archive.ubuntu.com/ubuntu/pool/main/l/lksctp-tools/libsctp1_1.0.15+dfsg-1_amd64.deb \
-http://archive.ubuntu.com/ubuntu/pool/main/j/java-common/java-common_0.51_all.deb \
-http://archive.ubuntu.com/ubuntu/pool/main/j/java-common/default-jre-headless_1.7-51_amd64.deb \
-http://archive.ubuntu.com/ubuntu/pool/main/c/ca-certificates-java/ca-certificates-java_20130815ubuntu1_all.deb \
-http://archive.ubuntu.com/ubuntu/pool/main/t/tzdata/tzdata-java_2015g-0ubuntu0.14.04_all.deb \
-http://archive.ubuntu.com/ubuntu/pool/main/libj/libjpeg8-empty/libjpeg8_8c-2ubuntu8_amd64.deb \
-http://archive.ubuntu.com/ubuntu/pool/main/o/openjdk-7/openjdk-7-jre-headless_7u85-2.6.1-5ubuntu0.14.04.1_amd64.deb \
-http://archive.ubuntu.com/ubuntu/pool/main/libc/libcommons-collections3-java/libcommons-collections3-java_3.2.1-6_all.deb \
-http://archive.ubuntu.com/ubuntu/pool/main/c/commons-pool/libcommons-pool-java_1.6-2_all.deb \
-http://archive.ubuntu.com/ubuntu/pool/main/libc/libcommons-dbcp-java/libcommons-dbcp-java_1.4-3ubuntu1_all.deb \
-http://archive.ubuntu.com/ubuntu/pool/main/e/ecj/libecj-java_3.9.0-1_all.deb \
-http://archive.ubuntu.com/ubuntu/pool/main/g/geronimo-jta-1.1-spec/libgeronimo-jta-1.1-spec-java_1.1.1-3ubuntu1_all.deb \
-http://archive.ubuntu.com/ubuntu/pool/main/t/tomcat7/libservlet3.0-java_7.0.52-1ubuntu0.3_all.deb \
-http://archive.ubuntu.com/ubuntu/pool/main/t/tomcat7/libtomcat7-java_7.0.52-1ubuntu0.3_all.deb \
-http://archive.ubuntu.com/ubuntu/pool/main/l/lksctp-tools/lksctp-tools_1.0.15+dfsg-1_amd64.deb \
-http://archive.ubuntu.com/ubuntu/pool/main/t/tomcat7/tomcat7-common_7.0.52-1ubuntu0.3_all.deb \
-http://archive.ubuntu.com/ubuntu/pool/main/t/tomcat7/tomcat7_7.0.52-1ubuntu0.3_all.deb \
-http://archive.ubuntu.com/ubuntu/pool/main/a/authbind/authbind_2.1.1_amd64.deb
-
+#download_package http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/liba/libasyncns/libasyncns0_0.8-4ubuntu2_amd64.deb  \
+#http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/a/avahi/libavahi-common-data_0.6.31-4ubuntu1_amd64.deb  \
+#http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/a/avahi/libavahi-common3_0.6.31-4ubuntu1_amd64.deb  \
+#http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/a/avahi/libavahi-client3_0.6.31-4ubuntu1_amd64.deb  \
+#http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/c/cups/libcups2_1.7.2-0ubuntu1.7_amd64.deb  \
+#http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/libo/libogg/libogg0_1.3.1-1ubuntu1_amd64.deb  \
+#http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/f/flac/libflac8_1.3.0-2ubuntu0.14.04.1_amd64.deb  \
+#http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/f/fonts-dejavu/fonts-dejavu-core_2.34-1ubuntu1_all.deb  \
+#http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/f/fontconfig/fontconfig-config_2.11.0-0ubuntu4.1_all.deb  \
+#http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/f/fontconfig/libfontconfig1_2.11.0-0ubuntu4.1_amd64.deb  \
+#http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/libj/libjpeg-turbo/libjpeg-turbo8_1.3.0-0ubuntu2_amd64.deb  \
+#http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/l/lcms2/liblcms2-2_2.5-0ubuntu4_amd64.deb  \
+#http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/n/nspr/libnspr4_4.10.10-0ubuntu0.14.04.1_amd64.deb  \
+#http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/n/nss/libnss3-nssdb_3.19.2.1-0ubuntu0.14.04.2_all.deb  \
+#http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/n/nss/libnss3_3.19.2.1-0ubuntu0.14.04.2_amd64.deb  \
+#http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/p/pcsc-lite/libpcsclite1_1.8.10-1ubuntu1_amd64.deb  \
+#http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/libv/libvorbis/libvorbis0a_1.3.2-1.3ubuntu1_amd64.deb  \
+#http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/libv/libvorbis/libvorbisenc2_1.3.2-1.3ubuntu1_amd64.deb  \
+#http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/libs/libsndfile/libsndfile1_1.0.25-7ubuntu2.1_amd64.deb  \
+#http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/p/pulseaudio/libpulse0_4.0-0ubuntu11.1_amd64.deb  \
+#http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/l/lksctp-tools/libsctp1_1.0.15+dfsg-1_amd64.deb  \
+#http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/j/java-common/java-common_0.51_all.deb  \
+#http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/j/java-common/default-jre-headless_1.7-51_amd64.deb  \
+#http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/c/ca-certificates-java/ca-certificates-java_20130815ubuntu1_all.deb  \
+#http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/t/tzdata/tzdata_2015g-0ubuntu0.14.04_all.deb  \
+#http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/t/tzdata/tzdata-java_2015g-0ubuntu0.14.04_all.deb  \
+#http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/libj/libjpeg8-empty/libjpeg8_8c-2ubuntu8_amd64.deb  \
+#http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/o/openjdk-7/openjdk-7-jre-headless_7u95-2.6.4-0ubuntu0.14.04.1_amd64.deb  \
+#http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/libc/libcommons-collections3-java/libcommons-collections3-java_3.2.1-6_all.deb  \
+#http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/c/commons-pool/libcommons-pool-java_1.6-2_all.deb  \
+#http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/libc/libcommons-dbcp-java/libcommons-dbcp-java_1.4-3ubuntu1_all.deb  \
+#http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/e/ecj/libecj-java_3.9.0-1_all.deb  \
+#http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/g/geronimo-jta-1.1-spec/libgeronimo-jta-1.1-spec-java_1.1.1-3ubuntu1_all.deb  \
+#http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/t/tomcat7/libservlet3.0-java_7.0.52-1ubuntu0.3_all.deb  \
+#http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/t/tomcat7/libtomcat7-java_7.0.52-1ubuntu0.3_all.deb  \
+#http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/l/lksctp-tools/lksctp-tools_1.0.15+dfsg-1_amd64.deb  \
+#http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/t/tomcat7/tomcat7-common_7.0.52-1ubuntu0.3_all.deb  \
+#http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/t/tomcat7/tomcat7_7.0.52-1ubuntu0.3_all.deb  \
+#http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/a/authbind/authbind_2.1.1_amd64.deb
 
 
 # Additional dependencies
-download_package http://archive.ubuntu.com/ubuntu/pool/main/u/unzip/unzip_6.0-9ubuntu1.4_amd64.deb
+#download_package http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/a/autogen/libopts25_5.18-2ubuntu2_amd64.deb  \
+#http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/n/ntp/ntp_4.2.6.p5+dfsg-3ubuntu2.14.04.6_amd64.deb  \
+#http://nova.clouds.archive.ubuntu.com/ubuntu/pool/main/u/unzip/unzip_6.0-9ubuntu1.5_amd64.deb
+
+# Java 8
+download_package http://ppa.launchpad.net/openjdk-r/ppa/ubuntu/pool/main/o/openjdk-8/openjdk-8-jre-headless_8u91-b14-0ubuntu4~14.04_amd64.deb \
+http://ppa.launchpad.net/openjdk-r/ppa/ubuntu/pool/main/o/openjdk-8/openjdk-8-jre_8u91-b14-0ubuntu4~14.04_amd64.deb \
+http://ppa.launchpad.net/openjdk-r/ppa/ubuntu/pool/main/o/openjdk-8/openjdk-8-jdk-headless_8u91-b14-0ubuntu4~14.04_amd64.deb \
+http://ppa.launchpad.net/openjdk-r/ppa/ubuntu/pool/main/o/openjdk-8/openjdk-8-jdk_8u91-b14-0ubuntu4~14.04_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/a/alsa-lib/libasound2-data_1.0.27.2-3ubuntu7_all.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/a/alsa-lib/libasound2_1.0.27.2-3ubuntu7_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/liba/libasyncns/libasyncns0_0.8-4ubuntu2_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/liba/libatasmart/libatasmart4_0.19-3_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/a/atk1.0/libatk1.0-data_2.10.0-2ubuntu2_all.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/a/atk1.0/libatk1.0-0_2.10.0-2ubuntu2_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/a/at-spi2-core/libatspi2.0-0_2.10.2.is.2.10.1-0ubuntu1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/a/at-spi2-atk/libatk-bridge2.0-0_2.10.2-2ubuntu1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/g/gtk+2.0/libgtk2.0-common_2.24.23-0ubuntu1.4_all.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/f/fonts-dejavu/fonts-dejavu-core_2.34-1ubuntu1_all.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/f/fontconfig/fontconfig-config_2.11.0-0ubuntu4.1_all.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/f/fontconfig/libfontconfig1_2.11.0-0ubuntu4.1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/p/pixman/libpixman-1-0_0.30.2-2ubuntu1.1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libx/libxcb/libxcb-render0_1.10-2ubuntu1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libx/libxcb/libxcb-shm0_1.10-2ubuntu1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libx/libxrender/libxrender1_0.9.8-1build0.14.04.1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/c/cairo/libcairo2_1.13.0~20140204-0ubuntu1.1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/a/avahi/libavahi-common-data_0.6.31-4ubuntu1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/a/avahi/libavahi-common3_0.6.31-4ubuntu1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/a/avahi/libavahi-client3_0.6.31-4ubuntu1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/c/cups/libcups2_1.7.2-0ubuntu1.7_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libj/libjpeg-turbo/libjpeg-turbo8_1.3.0-0ubuntu2_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libj/libjpeg8-empty/libjpeg8_8c-2ubuntu8_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/j/jasper/libjasper1_1.900.1-14ubuntu3.3_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/j/jbigkit/libjbig0_2.0-2ubuntu4.1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/t/tiff/libtiff5_4.0.3-7ubuntu0.4_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/g/gdk-pixbuf/libgdk-pixbuf2.0-common_2.30.7-0ubuntu1.2_all.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/g/gdk-pixbuf/libgdk-pixbuf2.0-0_2.30.7-0ubuntu1.2_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libt/libthai/libthai-data_0.1.20-3_all.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libd/libdatrie/libdatrie1_0.2.8-1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libt/libthai/libthai0_0.1.20-3_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/f/fontconfig/fontconfig_2.11.0-0ubuntu4.1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/p/pango1.0/libpango-1.0-0_1.36.3-1ubuntu1.1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/g/graphite2/libgraphite2-3_1.3.6-1ubuntu0.14.04.1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/h/harfbuzz/libharfbuzz0b_0.9.27-1ubuntu1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/p/pango1.0/libpangoft2-1.0-0_1.36.3-1ubuntu1.1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/p/pango1.0/libpangocairo-1.0-0_1.36.3-1ubuntu1.1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libx/libxcomposite/libxcomposite1_0.4.4-1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libx/libxfixes/libxfixes3_5.0.1-1ubuntu1.1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libx/libxcursor/libxcursor1_1.1.14-1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libx/libxdamage/libxdamage1_1.1.4-1ubuntu1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libx/libxi/libxi6_1.7.1.901-1ubuntu1.1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libx/libxinerama/libxinerama1_1.1.3-1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libx/libxrandr/libxrandr2_1.4.2-1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/g/gtk+2.0/libgtk2.0-0_2.24.23-0ubuntu1.4_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/n/nspr/libnspr4_4.10.10-0ubuntu0.14.04.1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/n/nss/libnss3-nssdb_3.21-0ubuntu0.14.04.2_all.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/n/nss/libnss3_3.21-0ubuntu0.14.04.2_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/c/ca-certificates-java/ca-certificates-java_20130815ubuntu1_all.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/j/java-common/java-common_0.51_all.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/l/lcms2/liblcms2-2_2.5-0ubuntu4.1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/p/pcsc-lite/libpcsclite1_1.8.10-1ubuntu1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/x/xorg/x11-common_7.7+1ubuntu8.1_all.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libx/libxtst/libxtst6_1.2.2-1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/m/mesa/libglapi-mesa_10.1.3-0ubuntu0.6_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libx/libx11/libx11-xcb1_1.6.2-1ubuntu2_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libx/libxcb/libxcb-dri2-0_1.10-2ubuntu1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libx/libxcb/libxcb-dri3-0_1.10-2ubuntu1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libx/libxcb/libxcb-glx0_1.10-2ubuntu1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libx/libxcb/libxcb-present0_1.10-2ubuntu1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libx/libxcb/libxcb-sync1_1.10-2ubuntu1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libx/libxshmfence/libxshmfence1_1.1-2_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libx/libxxf86vm/libxxf86vm1_1.1.3-1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/m/mesa/libgl1-mesa-glx_10.1.3-0ubuntu0.6_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/g/giflib/libgif4_4.1.6-11_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libo/libogg/libogg0_1.3.1-1ubuntu1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/f/flac/libflac8_1.3.0-2ubuntu0.14.04.1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libv/libvorbis/libvorbis0a_1.3.2-1.3ubuntu1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libv/libvorbis/libvorbisenc2_1.3.2-1.3ubuntu1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libs/libsndfile/libsndfile1_1.0.25-7ubuntu2.1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/p/pulseaudio/libpulse0_4.0-0ubuntu11.1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/j/java-atk-wrapper/libatk-wrapper-java_0.30.4-4_all.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/j/java-atk-wrapper/libatk-wrapper-java-jni_0.30.4-4_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/a/avahi/libavahi-glib1_0.6.31-4ubuntu1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libb/libbonobo/libbonobo2-common_2.32.1-0ubuntu5_all.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libi/libidl/libidl-common_0.8.14-0.2ubuntu4_all.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libi/libidl/libidl0_0.8.14-0.2ubuntu4_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/o/orbit2/liborbit-2-0_2.14.19-0.3_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/o/orbit2/liborbit2_2.14.19-0.3_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libb/libbonobo/libbonobo2-0_2.32.1-0ubuntu5_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/c/cairo/libcairo-gobject2_1.13.0~20140204-0ubuntu1.1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libt/libtool/libltdl7_2.4.2-1.7ubuntu1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/t/tdb/libtdb1_1.3.8-0ubuntu0.14.04.1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libv/libvorbis/libvorbisfile3_1.3.2-1.3ubuntu1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/s/sound-theme-freedesktop/sound-theme-freedesktop_0.8-1_all.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libc/libcanberra/libcanberra0_0.30-0ubuntu3_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/c/colord/libcolord1_1.0.6-1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/d/d-conf/libdconf1_0.20.0-1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libp/libpciaccess/libpciaccess0_0.13.2-1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libd/libdrm/libdrm-intel1_2.4.64-1~ubuntu14.04.1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libd/libdrm/libdrm-nouveau2_2.4.64-1~ubuntu14.04.1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libd/libdrm/libdrm-radeon1_2.4.64-1~ubuntu14.04.1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libe/libexif/libexif12_0.6.21-1ubuntu1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libf/libfontenc/libfontenc1_1.1.2-1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/g/gconf/gconf2-common_3.2.6-0ubuntu2_all.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/g/gconf/libgconf-2-4_3.2.6-0ubuntu2_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libv/libvpx/libvpx1_1.3.0-2_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libx/libxpm/libxpm4_3.5.10-1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libg/libgd2/libgd3_2.1.0-3_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/l/llvm-toolchain-3.4/libllvm3.4_3.4-1ubuntu3_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/m/mesa/libgl1-mesa-dri_10.1.3-0ubuntu0.6_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/g/gconf/gconf-service-backend_3.2.6-0ubuntu2_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/g/gconf/gconf-service_3.2.6-0ubuntu2_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/d/dbus/dbus-x11_1.6.18-0ubuntu4.3_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/g/gconf/gconf2_3.2.6-0ubuntu2_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/g/gnome-vfs/libgnomevfs2-common_2.24.4-1ubuntu6_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/g/gnome-vfs/libgnomevfs2-0_2.24.4-1ubuntu6_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libg/libgnome/libgnome2-common_2.32.1-4ubuntu1_all.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libg/libgnome/libgnome2-bin_2.32.1-4ubuntu1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libg/libgnome/libgnome2-0_2.32.1-4ubuntu1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libg/libgphoto2/libgphoto2-port10_2.5.3.1-1ubuntu2.2_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libg/libgphoto2/libgphoto2-6_2.5.3.1-1ubuntu2.2_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/d/d-conf/dconf-service_0.20.0-1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/d/d-conf/dconf-gsettings-backend_0.20.0-1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/g/gtk+3.0/libgtk-3-common_3.10.8-0ubuntu1.6_all.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/w/wayland/libwayland-client0_1.4.0-1ubuntu1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/w/wayland/libwayland-cursor0_1.4.0-1ubuntu1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libx/libxkbcommon/libxkbcommon0_0.4.1-0ubuntu1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/g/gtk+3.0/libgtk-3-0_3.10.8-0ubuntu1.6_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/s/systemd/libgudev-1.0-0_204-5ubuntu20.19_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libi/libice/libice6_1.0.8-2_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libi/libieee1284/libieee1284-3_0.2.11-12_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/p/policykit-1/libpolkit-agent-1-0_0.105-4ubuntu3.14.04.1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/p/policykit-1/libpolkit-backend-1-0_0.105-4ubuntu3.14.04.1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/s/sane-backends/libsane-common_1.0.23-3ubuntu3.1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/v/v4l-utils/libv4lconvert0_1.0.1-1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/v/v4l-utils/libv4l-0_1.0.1-1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/s/sane-backends/libsane_1.0.23-3ubuntu3.1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libs/libsecret/libsecret-common_0.16-0ubuntu1_all.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libs/libsecret/libsecret-1-0_0.16-0ubuntu1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libs/libsm/libsm6_1.2.1-2_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/u/udisks2/libudisks2-0_2.1.3-1ubuntu0.1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libx/libxt/libxt6_1.1.4-1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libx/libxmu/libxmu6_1.1.1-1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libx/libxaw/libxaw7_1.0.12-1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libx/libxcb/libxcb-shape0_1.10-2ubuntu1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/x/xft/libxft2_2.3.1-2_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libx/libxv/libxv1_1.0.10-1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libx/libxxf86dga/libxxf86dga1_1.1.4-1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libg/libgusb/libgusb2_0.1.6-5_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/c/colord/libcolorhug1_1.0.6-1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/s/s2tc/libtxc-dxtn-s2tc0_0~git20131104-1.1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/a/at-spi2-core/at-spi2-core_2.10.2.is.2.10.1-0ubuntu1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/p/policykit-1/policykit-1_0.105-4ubuntu3.14.04.1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/c/colord/colord_1.0.6-1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/d/desktop-file-utils/desktop-file-utils_0.22-1ubuntu1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/f/fonts-dejavu/fonts-dejavu-extra_2.34-1ubuntu1_all.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/x/x11-utils/x11-utils_7.7+1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/u/udisks2/udisks2_2.1.3-1ubuntu0.1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/g/gvfs/gvfs-common_1.20.3-0ubuntu1.2_all.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/g/gvfs/gvfs-libs_1.20.3-0ubuntu1.2_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/g/gvfs/gvfs-daemons_1.20.3-0ubuntu1.2_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/g/gvfs/gvfs_1.20.3-0ubuntu1.2_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/h/hicolor-icon-theme/hicolor-icon-theme_0.13-1_all.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/g/gconf/libgconf2-4_3.2.6-0ubuntu2_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libg/libgphoto2/libgphoto2-l10n_2.5.3.1-1ubuntu2.2_all.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/g/gtk+3.0/libgtk-3-bin_3.10.8-0ubuntu1.6_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/g/gtk+2.0/libgtk2.0-bin_2.24.23-0ubuntu1.4_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/x/xorg-sgml-doctools/xorg-sgml-doctools_1.11-1_all.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/x/x11proto-core/x11proto-core-dev_7.0.26-1~ubuntu2_all.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libi/libice/libice-dev_1.0.8-2_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libp/libpthread-stubs/libpthread-stubs0-dev_0.3-4_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libs/libsm/libsm-dev_1.2.1-2_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libx/libxau/libxau-dev_1.0.8-1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libx/libxdmcp/libxdmcp-dev_1.1.1-1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/x/x11proto-input/x11proto-input-dev_2.3-1_all.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/x/x11proto-kb/x11proto-kb-dev_1.0.6-2_all.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/x/xtrans/xtrans-dev_1.3.5-1~ubuntu14.04.1_all.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libx/libxcb/libxcb1-dev_1.10-2ubuntu1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libx/libx11/libx11-dev_1.6.2-1ubuntu2_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libx/libx11/libx11-doc_1.6.2-1ubuntu2_all.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/libx/libxt/libxt-dev_1.1.4-1_amd64.deb \
+http://archive.ubuntu.com/ubuntu/pool/main/p/policykit-1-gnome/policykit-1-gnome_0.105-1ubuntu4_amd64.deb
+
+# Install puppet manifests
+download_puppet_module "apt" "$APT_TARBALL_URL"
+download_puppet_module "stdlib" "$STDLIB_TARBALL_URL"
+download_puppet_module "mariadbrepo" "$MARIADBREPO_TARBALL_URL"

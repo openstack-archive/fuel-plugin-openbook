@@ -31,6 +31,6 @@ you to better plan for new capacity.
 ## Requirements
 | Requirement                      | Version/Comment                           |
 |----------------------------------|-------------------------------------------|
-| Mirantis OpenStack compatility   | 7.0                                       |
+| Mirantis OpenStack compatility   | 8.0                                       |
 | Distribution Supported           | Ubuntu                                    |
 | Talligent Sharefile access       | Contact openbook@talligent.com for access |
