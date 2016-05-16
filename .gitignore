@@ -1,0 +1,10 @@
+.tox
+.build
+*.pyc
+repositories/centos/*
+repositories/ubuntu/*
+*.rpm
+doc/build
+deployment_scripts/puppet/modules/apt
+deployment_scripts/puppet/modules/mariadbrepo
+deployment_scripts/puppet/modules/stdlib
