@@ -8,23 +8,25 @@ User Guide
 Plugin configuration
 --------------------
 
-#. `Create a new environment <https://docs.mirantis.com/openstack/fuel/fuel-7.0/user-guide.html#launch-wizard-to-create-new-environment>`_
+#. `Create a new environment <http://docs.openstack.org/developer/fuel-docs/userdocs/fuel-user-guide/create-environment/start-create-env.html>`_
    with the Fuel UI wizard.  At the moment only the Ubuntu distribution is supported.
+   
+   .. note:: Please note – the Ceilometer service is not required for all Openbook use cases. Where Ceilometer
+             is not available or has been disabled, you still have the ability to bill for service instances such as
+             instances, volumes, or floating IPs in intervals of 15 minutes (service instances created and deleted
+             within the 15 minute interval will not be billed). In this circumstance, unselect the incremental
+             sync, and decrease the interval for the full resync.
+             
+             With Ceilometer, you have the ability to bill for service instances in intervals of a second or ability
+             to bill for metered resources such as network bandwidth, object storage bytes on disk.
 
-   * When stepping through the 'new OpenStack environment' wizard, be sure to enable 
-     Ceilometer in the Additonal Services section. Openbook relies on various endpoints 
-     for data, one of which is Ceilometer. 
-    
-     .. image:: _static/ceilometer-select_s.png
-        :alt: A screenshot of the Install Ceilometer step
-    
 #. Click on the Settings tab of the Fuel web UI.
 
-   Select the "Openbook Plugin" tab, enable the plugin by clicking on the
+   Select "Other", enable the plugin by clicking on the
    "Openbook Plugin" checkbox and fill-in the required fields (default for 'database password' is Tall!g3nt):
 
    .. image:: _static/plugin-openbook-config_s.png
-      :alt: A screenshot of the Openbook Plugin settings UI for 7.0
+      :alt: A screenshot of the Openbook Plugin settings UI for 8.0
       :scale: 90%
 
    .. note:: The Sharefile Username will be your e-mail and the password will be the one you setup
@@ -35,16 +37,16 @@ Plugin configuration
 
 #. Switch to the *Nodes* tab.
 
-#. After `adding all OpenStack nodes/roles <https://docs.mirantis.com/openstack/fuel/fuel-7.0/user-guide.html#add-nodes-ug>`_,
+#. After `adding all OpenStack nodes/roles <http://docs.openstack.org/developer/fuel-docs/userdocs/fuel-user-guide/configure-environment/add-nodes.html>`_,
    add an Openbook node (optional: rename to something meaningful, such as "openbook"):
    
    .. image:: _static/openbook-node.png
       :alt: A screenshot of the Openbook host name
       :scale: 90%
 
-#. Select the *Networks* tab, scroll to the bottom, and `Verify Networks <https://docs.mirantis.com/openstack/fuel/fuel-7.0/user-guide.html#verify-networks>`_.
+#. Select the *Networks* tab, select *Connectivity Check*, and `Verify Networks <http://docs.openstack.org/developer/fuel-docs/userdocs/fuel-user-guide/configure-environment/verify-networks.html>`_.
 
-#. Then finally, `Deploy Changes <https://docs.mirantis.com/openstack/fuel/fuel-7.0/user-guide.html#deploy-changes>`_.
+#. Then finally, `Deploy Changes <http://docs.openstack.org/developer/fuel-docs/userdocs/fuel-user-guide/deploy-environment/deploy-changes.html>`_.
 
 .. _plugin_install_verification:
 
@@ -60,7 +62,7 @@ the plugin is deployed and will give the URL schema for accessing the Openbook U
 
 Use the fuel command line to retrieve the IP address of the openbook node.
 
-.. _retrieve-ip: 
+.. _retrieve_ip: 
 
 .. code:: bash
 
@@ -68,7 +70,7 @@ Use the fuel command line to retrieve the IP address of the openbook node.
     id | status   | name          | cluster | ip        | [..] | roles             | [..] 
     ---|----------|---------------|---------|-----------|------|-------------------|------
     2  | ready    | compute-01    | 2       | 10.20.0.4 |      | cinder, compute   |      
-    1  | ready    | controller-01 | 2       | 10.20.0.3 |      | controller, mongo |      
+    1  | ready    | controller-01 | 2       | 10.20.0.3 |      | controller        |      
     3  | ready    | openbook      | 2       | 10.20.0.5 |      | openbook          |      
     .. | .....    | ..............| ...     | ......... |      | ...............   |      
 
@@ -77,4 +79,12 @@ In this example, the Openbook UI would be accessed at ``https://10.20.0.5:8443/O
 Using Openbook
 --------------
 
-For instructions on using Openbook, please see the `official documentation <https://talligent.sharefile.com/>`_.
+Official documentation for various features of Openbook can be found below.
+
+* Guide: `Creating a Rate Plan <http://talligent.com/resources/openbook-v3-how-to-guide-creating-a-rate-plan/>`_
+
+* Guide: `Capacity Reports <http://talligent.com/resources11/openbook-v3-guide-capacity-reports/>`_
+
+* Guide: `Extracting Data from Openbook (API) <http://talligent.com/resources/openbook-v3-how-to-guide-extracting-data/>`_
+
+
