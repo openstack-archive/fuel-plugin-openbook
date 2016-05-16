@@ -39,7 +39,7 @@ Requirements
 +----------------------------------+-----------------------------------------------------------------------+
 | **Requirement**                  | **Version/Comment**                                                   |
 +==================================+=======================================================================+
-| Mirantis OpenStack compatility   | 7.0 or higher                                                         |
+| Mirantis OpenStack compatility   | 8.0                                                                   |
 +----------------------------------+-----------------------------------------------------------------------+
 | Distribution Supported           | Ubuntu                                                                |
 +----------------------------------+-----------------------------------------------------------------------+
@@ -55,4 +55,4 @@ Limitations
 
 A current limitation of this plugin is that it not possible to display in the Fuel web UI the URL where the
 Openbook interface can be reached when the deployment has completed. Instructions are provided in the
-:ref:`User Guide <retrieve-ip>` about how you can obtain this URL using the `fuel command line <https://docs.mirantis.com/openstack/fuel/fuel-7.0/user-guide.html#using-fuel-cli>`_.
+:ref:`User Guide <retrieve_ip>` about how you can obtain this URL.
