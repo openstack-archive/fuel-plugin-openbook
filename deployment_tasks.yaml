@@ -1,12 +1,66 @@
+# Groups
 - id: openbook
   type: group
   role: [openbook]
-  tasks:
+  tasks: &common_tasks
     - hiera
+#    - setup_repositories
+#    - fuel_pkgs
     - globals
     - netconfig
+    - hosts
+#    - hiera
+#    - globals
+#    - netconfig
   required_for: [deploy_end]
   requires: [deploy_start,controller]
   parameters:
     strategy:
-      type: parallel
+      type: one_by_one
+      #type: parallel
+
+# Configure haproxy on OpenStack Controllers
+#- id: openstack-haproxy-openbook
+#  type: puppet
+#  groups: [primary-controller, controller]
+#  required_for: [deploy_end]
+#  requires: [deploy_start, openstack-haproxy, rabbitmq]
+#  parameters:
+#    puppet_manifest: puppet/manifests/controller-vip.pp
+#    puppet_modules: puppet/modules:/etc/puppet/modules
+#    timeout: 720
+
+# Tasks
+# Enviornment check
+- id: environment-check
+  type: puppet
+  groups: ['openbook']
+  required_for: [deploy_end]
+  requires: [deploy_start,globals]
+  parameters:
+    puppet_manifest: puppet/manifests/check_environment_configuration.pp
+    puppet_modules: puppet/modules
+    timeout: 300
+
+# Deploy Openbook
+- id: deploy-openbook
+  type: puppet
+  groups: ['openbook']
+  required_for: [deploy_end]
+  requires: [deploy_start]
+  parameters:
+    puppet_manifest: puppet/manifests/deploy.pp
+    puppet_modules: puppet/modules
+    timeout: 1500
+
+# Finalize Openbook deployment
+- id: finalize-openbook
+  type: puppet
+  groups: ['openbook']
+  required_for: [deploy_end]
+  requires: [deploy_start,controller]
+  parameters:
+    puppet_manifest: puppet/manifests/finalize.pp
+    puppet_modules: puppet/modules
+    timeout: 300
+
