@@ -4,7 +4,7 @@
    contain the root `toctree` directive.
 
 ================================================
-Guide to the Openbook Plugin ver. 1.3.0 for Fuel
+Guide to the Openbook Plugin ver. 1.3.3 for Fuel
 ================================================
 
 User documentation
