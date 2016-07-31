@@ -14,7 +14,7 @@ of the plugin.  You can also refer to the `CLI command reference for Fuel Plugin
 
    .. code:: bash
 
-       scp openbook*rpm root@<Fuel Master node IP address>:
+       scp openbook*rpm root@<Fuel Master node IP address>:/root/
 
 #. Install the plugin using the fuel command line:
 
@@ -31,3 +31,9 @@ of the plugin.  You can also refer to the `CLI command reference for Fuel Plugin
        id | name     | version | package_version
        ---|----------|---------|----------------
        1  | openbook | 1.3.0   | 4.0.0         
+
+#. Copy the Openbook-*.zip package to the Fuel Master node (note: should be Openbook.zip on the Fuel Master node)
+
+   .. code:: bash
+
+       scp Openbook-*.zip root@<Fuel Master node IP>:/var/www/nailgun/plugins/openbook-1.3/deployment_scripts/puppet/modules/openbook/files/Openbook.zip

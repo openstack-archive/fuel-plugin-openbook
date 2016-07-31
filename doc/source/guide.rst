@@ -29,10 +29,6 @@ Plugin configuration
       :alt: A screenshot of the Openbook Plugin settings UI for 8.0
       :scale: 90%
 
-   .. note:: The Sharefile Username will be your e-mail and the password will be the one you setup
-             when you received the e-mail about your Sharefile account being created. If you do not
-             have Sharefile access to Talligent, please contact openbook@talligent.com.
-
 #. Click *Save Settings* at the bottom of the page to save the configuration parameters.
 
 #. Switch to the *Nodes* tab.

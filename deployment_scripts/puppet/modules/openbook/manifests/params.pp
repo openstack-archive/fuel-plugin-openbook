@@ -36,14 +36,14 @@ class openbook::params {
   $openbook = hiera_hash('openbook')
   $jvm_heap = $openbook['jvm_heap_size']
   
-  $sharefile_username        = $openbook['sharefile_user']
-  $sharefile_password        = $openbook['sharefile_pass']
+  $sharefile_username        = '' #$openbook['sharefile_user']
+  $sharefile_password        = '' #$openbook['sharefile_pass']
   $sharefile_hostname        = 'talligent.sharefile.com'
   $sharefile_client_id       = 'eC8y8eeoeunxzOizZq2oeknIVfA9Jyjg'
   $sharefile_client_secret   = 'PehmEqzEgKuGm2XOZWXIOUY3GyrKcfSmNtwPptPwt0tWxihs'
   $sharefile_download_path   = '/tmp/Openbook.zip'
   
-  $db_password               = 'Tall!g3nt'
+  $db_password               = $openbook['db_password']
   $db_version                = '10.1'
   $keystore_pass             = 'rG8EE69CC0OuQKW+6pC6LytgRQM7QZUmt5CDySUgupY='
   $ipaddress                 = $::ipaddress
@@ -51,7 +51,7 @@ class openbook::params {
   case $::operatingsystem {
     'Ubuntu', 'Debian': {
       $db_server_pkg             = 'mariadb-server'
-      $db_client_pkg             = "mariadb-client-${db_version}"
+#      $db_client_pkg             = "mariadb-client-${db_version}"
       $app_server_pkg            = 'tomcat7'
       $java_pkg                  = 'openjdk-8-jdk'
       

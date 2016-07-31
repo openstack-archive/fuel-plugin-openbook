@@ -44,18 +44,30 @@ class openbook::tomcat::server {
     content => template('openbook/sharefile_download.py.erb'),
   }
   
-  exec { 'download openbook':
-    command   => '/usr/bin/python /tmp/sharefile_download.py',
-    unless    => '/usr/bin/test -f /tmp/Openbook.war',
-    require   => File['sharefile_download.py'],
-    timeout   => 1200
+#  exec { 'download openbook':
+#    command   => '/usr/bin/python /tmp/sharefile_download.py',
+#    unless    => '/usr/bin/test -f /tmp/Openbook.war',
+#    require   => File['sharefile_download.py'],
+#    timeout   => 1200
+#  }
+  
+  file { 'Openbook.zip':
+    path   => '/tmp/Openbook.zip',
+    ensure  => present,
+    source    => 'puppet:///modules/openbook/Openbook.zip'
   }
   
   exec { 'unzip openbook':
     command   => '/usr/bin/unzip -q /tmp/Openbook.zip -d /tmp/',
     unless    => '/usr/bin/test -d /tmp/Openbook-*',
-    require   => [Exec['download openbook'], Package['unzip']]
+    require   => [File['Openbook.zip'], Package['unzip']]
   }
+  
+#  exec { 'unzip openbook':
+#    command   => '/usr/bin/unzip -q /tmp/Openbook.zip -d /tmp/',
+#    unless    => '/usr/bin/test -d /tmp/Openbook-*',
+#    require   => [File['download openbook'], Package['unzip']]
+#  }
   
   file { 'openbook.properties':
     path    => '/var/lib/tomcat7/webapps/Openbook/WEB-INF/classes/openbook.properties',

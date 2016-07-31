@@ -2,16 +2,24 @@
 - id: openbook
   type: group
   role: [openbook]
-  tasks: &common_tasks
+  tasks: #[hiera, globals, netconfig, hosts, deploy_start]
     - hiera
-#    - setup_repositories
-#    - fuel_pkgs
+    - setup_repositories
+    - fuel_pkgs
     - globals
+    - tools
+    - logging
     - netconfig
     - hosts
 #    - hiera
+##    - setup_repositories
+##    - fuel_pkgs
 #    - globals
 #    - netconfig
+#    - hosts
+##    - hiera
+##    - globals
+##    - netconfig
   required_for: [deploy_end]
   requires: [deploy_start,controller]
   parameters:
@@ -47,7 +55,7 @@
   type: puppet
   groups: ['openbook']
   required_for: [deploy_end]
-  requires: [deploy_start]
+  requires: [environment-check]
   parameters:
     puppet_manifest: puppet/manifests/deploy.pp
     puppet_modules: puppet/modules
@@ -58,7 +66,7 @@
   type: puppet
   groups: ['openbook']
   required_for: [deploy_end]
-  requires: [deploy_start,controller]
+  requires: [deploy-openbook,controller]
   parameters:
     puppet_manifest: puppet/manifests/finalize.pp
     puppet_modules: puppet/modules

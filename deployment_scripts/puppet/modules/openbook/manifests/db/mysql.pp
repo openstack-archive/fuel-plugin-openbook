@@ -49,19 +49,19 @@ class openbook::db::mysql {
   #  require => Package[$openbook::params::db_server_pkg]
   #}
   
-  class { 'mariadbrepo':
-    version => "$openbook::params::db_version"
-  }
+#  class { 'mariadbrepo':
+#    version => "$openbook::params::db_version"
+#  }
   
   package { "$openbook::params::db_server_pkg" :
     ensure => present,
-    require => Class['mariadbrepo']
+    #require => Class['mariadbrepo']
   }
   
-  package { "$openbook::params::db_client_pkg" :
-    ensure => present,
-    require => Class['mariadbrepo']
-  }
+#  package { "$openbook::params::db_client_pkg" :
+#    ensure => present,
+#    #require => Class['mariadbrepo']
+#  }
   
   service { 'mysql':
     ensure => running,

@@ -18,25 +18,25 @@ attributes:
     weight: 10
     type: "text"
   
-  sharefile_user:
-    type: "text"
-    weight: 50
-    value: ""
-    label: "Sharefile Username (e-mail)"
-    description: "Sharefile username is required to download Openbook"
-    regex: &email
-      source: '[a-z0-9!#$%&*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.?)?[a-z0-9]?(?:[a-z0-9-]*[a-z0-9])?'
-      error: "Invalid email address"
-  
-  sharefile_pass:
-    type: "password"
-    weight: 51
-    value: ""
-    label: "Sharefile Password"
-    description: "Sharefile password is required to download Openbook"
-    regex: &not_empty_parameter
-      source: '\S'
-      error: "Invalid value"
+#  sharefile_user:
+#    type: "text"
+#    weight: 50
+#    value: ""
+#    label: "Sharefile Username (e-mail)"
+#    description: "Sharefile username is required to download Openbook"
+#    regex: &email
+#      source: '[a-z0-9!#$%&*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.?)?[a-z0-9]?(?:[a-z0-9-]*[a-z0-9])?'
+#      error: "Invalid email address"
+#  
+#  sharefile_pass:
+#    type: "password"
+#    weight: 51
+#    value: ""
+#    label: "Sharefile Password"
+#    description: "Sharefile password is required to download Openbook"
+#    regex: &not_empty_parameter
+#      source: '\S'
+#      error: "Invalid value"
   
   jvm_heap_size:
     value: '1'
