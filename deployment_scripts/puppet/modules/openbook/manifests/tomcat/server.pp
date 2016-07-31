@@ -20,7 +20,7 @@ class openbook::tomcat::server {
   $ipaddress = $::ipaddress
   
   # Add OpenJDK  repo & install version 8
-  apt::ppa { 'ppa:openjdk-r/ppa':} ->
+#  apt::ppa { 'ppa:openjdk-r/ppa':} ->
   package { "$openbook::params::java_pkg":
     ensure => present,
   }->  
